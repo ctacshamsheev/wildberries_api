@@ -1,0 +1,74 @@
+version: '3.9'
+
+services:
+  appserver:
+    build:
+      context: ./wildberries-api-statistics/
+      dockerfile: ./Dockerfile
+    container_name: wb
+    #    image: steshabolk/wb-price-tracker-api
+    restart: always
+    ports:
+      - '80:8080'
+    depends_on:
+      - postgres
+    #      - rabbitmq
+    environment:
+      #      TZ: Europe/Moscow
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/wb
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+
+  #      SPRING_RABBITMQ_HOST: rabbitmq
+  #      SPRING_RABBITMQ_USERNAME: admin
+  #      SPRING_RABBITMQ_PASSWORD: admin
+  #    volumes:
+  #      - ./logs/WbPriceTrackerApi:/api/logs
+
+  #
+  #  rabbitmq:
+  #    container_name: rabbitmq
+  #    image: rabbitmq:3.10.7-management-alpine
+  #    restart: always
+  #    ports:
+  #      - '5672:5672'
+  #      - '15672:15672'
+  #    environment:
+  #      RABBITMQ_DEFAULT_USER: admin
+  #      RABBITMQ_DEFAULT_PASS: admin
+  #      RABBITMQ_DEFAULT_VHOST: /
+
+  postgres:
+    container_name: postgres
+    image: postgres:13.7
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: wb
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4:6.8
+    restart: always
+    ports:
+      - '5050:5050'
+    environment:
+      PGADMIN_DEFAULT_EMAIL: pgadmin4@pgadmin.org
+      PGADMIN_DEFAULT_PASSWORD: postgres
+      PGADMIN_LISTEN_PORT: 5050
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+      PGADMIN_SERVER_JSON_FILE: /pgadmin4/servers.json
+    depends_on:
+      - postgres
+    links:
+      - postgres:pgsql-server
+    volumes:
+      - ./servers.json:/pgadmin4/servers.json
+
+volumes:
+  postgres-data:

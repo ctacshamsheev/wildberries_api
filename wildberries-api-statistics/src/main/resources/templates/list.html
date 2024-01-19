@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div>
+    <table border="collapse">
+        <ul>
+            <tr>
+                <td>
+                    <li><b>name:</b></li>
+                </td>
+                <td><b>address:</b></td>
+                <td><b>phone:</b></td>
+            </tr>
+            <tr th:each="note : ${notes}">
+                <td>
+                    <li th:text="${note.name}"></li>
+                </td>
+                <td th:text="${note.address}"></td>
+                <td th:text="${note.phone}"></td>
+            </tr>
+        </ul>
+    </table>
+</div>
+</body>
+</html>

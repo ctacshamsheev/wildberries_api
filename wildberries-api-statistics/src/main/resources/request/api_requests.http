@@ -1,0 +1,45 @@
+### - /api/add добавление записи
+POST localhost:8080/api/add
+Content-Type: application/json
+Cookie: auth=2025-12-31T23:59:59
+
+{
+  "name": "Name4",
+  "address": "Adress4",
+  "phone": "+79999993344"
+}
+
+### - /api/list просмотр записей
+GET localhost:8080/api/list
+Cookie: auth=2025-12-31T23:59:59
+
+### - /api/list поиск если будет переданы query параметры запроса
+GET localhost:8080/api/list?name=Name
+Cookie: auth=2025-12-31T23:59:59
+
+### - /api/list поиск если будет переданы query параметры запроса
+GET localhost:8080/api/list?name=Name4&address=Adress4
+Cookie: auth=2025-12-31T23:59:59
+
+### - /api/{id}/view просмотр конкретной записи
+GET localhost:8080/api/0/view
+Cookie: auth=2025-12-31T23:59:59
+
+### - /api/{id}/edit редактирование конкретной записи
+PUT localhost:8080/api/0/edit
+Content-Type: application/json
+Cookie: auth=2025-12-31T23:59:59
+
+{
+  "name": "NameNEW",
+  "address": "AdressNEW",
+  "phone": "+79999999999"
+}
+
+### - /api/{id}/delete удаление конкретной записи
+DELETE localhost:8080/api/1/delete
+Content-Type: application/json
+Cookie: auth=2025-12-31T23:59:59
+
+### - /api/list просмотр записей запрещен, не авторизованным пользователям
+GET localhost:8080/api/list

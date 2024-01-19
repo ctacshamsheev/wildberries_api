@@ -1,0 +1,13 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<form method="POST" th:action="@{/app/__${id}__/edit}">
+    <p>name:<input th:field="*{note.name}" type="text"/></p>
+    <p>address:<input th:field="*{note.address}" type="text"/></p>
+    <p>phone:<input th:field="*{note.phone}" type="text"/></p>
+    <input type="submit" value="save"/>
+</form>
+
+</form>
+</body>
+</html>
