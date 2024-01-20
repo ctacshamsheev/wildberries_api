@@ -407,71 +407,71 @@
                 <artifactId>openapi-generator-maven-plugin</artifactId>
                 <version>7.2.0</version>
                 <executions>
-                    <execution>
-                        <id>default</id>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <configuration>
-                            <!-- specify the swagger yaml -->
-                            <inputSpec>${project.basedir}/swagger.yaml</inputSpec>
-                            <cleanupOutput>true</cleanupOutput>
-
-                            <!-- target to generate kotlin client code -->
-                            <generatorName>kotlin</generatorName>
-
-                            <!-- hint: if you want to generate kotlin server code, e.g. based on Spring Boot,
-                                 you can use the following generator: <generatorName>kotlin-spring</generatorName> -->
-                            <!--                            <library>spring-boot</library>-->
-                            <!--                            <library>jvm-spring-webclient</library>-->
-                            <!--                            todo-->
-                            <generateApiTests>true</generateApiTests>
-                            <generateModelTests>false</generateModelTests>
-                            <!--                            <generateSupportingFiles>false</generateSupportingFiles>-->
-
-                            <!-- pass any necessary config options -->
-                            <configOptions>
-                                <serializableModel>true</serializableModel>
-                                <!--                            todo-->
-                                <generateForOpenFeign>true</generateForOpenFeign>
-                                <serializationLibrary>jackson</serializationLibrary>
-
-                                <!--                            todo-->
-                                <!--                                <dateLibrary>legacy</dateLibrary>-->
-                                <!--                                <defaultInterfaces>false</defaultInterfaces>-->
-                            </configOptions>
-
-                        </configuration>
-                    </execution>
                     <!--                    <execution>-->
-                    <!--                        <id>kotlin</id>-->
-                    <!--                        <phase>generate-sources</phase>-->
+                    <!--                        <id>default</id>-->
                     <!--                        <goals>-->
                     <!--                            <goal>generate</goal>-->
                     <!--                        </goals>-->
                     <!--                        <configuration>-->
                     <!--                            &lt;!&ndash; specify the swagger yaml &ndash;&gt;-->
-                    <!--                            <inputSpec>-->
-                    <!--                                https://raw.githubusercontent.com/OpenAPITools/openapi-generator/master/modules/openapi-generator/src/test/resources/2_0/petstore.yaml-->
-                    <!--                            </inputSpec>-->
+                    <!--                            <inputSpec>${project.basedir}/swagger.yaml</inputSpec>-->
+                    <!--                            <cleanupOutput>true</cleanupOutput>-->
 
-                    <!--                            &lt;!&ndash; target to generate java client code &ndash;&gt;-->
+                    <!--                            &lt;!&ndash; target to generate kotlin client code &ndash;&gt;-->
                     <!--                            <generatorName>kotlin</generatorName>-->
 
-                    <!--                            &lt;!&ndash; hint: if you want to generate java server code, e.g. based on Spring Boot,-->
-                    <!--                                 you can use the following target: <generatorName>spring</generatorName> &ndash;&gt;-->
+                    <!--                            &lt;!&ndash; hint: if you want to generate kotlin server code, e.g. based on Spring Boot,-->
+                    <!--                                 you can use the following generator: <generatorName>kotlin-spring</generatorName> &ndash;&gt;-->
+                    <!--                            &lt;!&ndash;                            <library>spring-boot</library>&ndash;&gt;-->
+                    <!--                            &lt;!&ndash;                            <library>jvm-spring-webclient</library>&ndash;&gt;-->
+                    <!--                            &lt;!&ndash;                            todo&ndash;&gt;-->
+                    <!--                            <generateApiTests>true</generateApiTests>-->
+                    <!--                            <generateModelTests>false</generateModelTests>-->
+                    <!--                            &lt;!&ndash;                            <generateSupportingFiles>false</generateSupportingFiles>&ndash;&gt;-->
 
                     <!--                            &lt;!&ndash; pass any necessary config options &ndash;&gt;-->
                     <!--                            <configOptions>-->
                     <!--                                <serializableModel>true</serializableModel>-->
+                    <!--                                &lt;!&ndash;                            todo&ndash;&gt;-->
+                    <!--                                <generateForOpenFeign>true</generateForOpenFeign>-->
+                    <!--                                <serializationLibrary>jackson</serializationLibrary>-->
+
+                    <!--                                &lt;!&ndash;                            todo&ndash;&gt;-->
+                    <!--                                &lt;!&ndash;                                <dateLibrary>legacy</dateLibrary>&ndash;&gt;-->
+                    <!--                                &lt;!&ndash;                                <defaultInterfaces>false</defaultInterfaces>&ndash;&gt;-->
                     <!--                            </configOptions>-->
 
-                    <!--                            <output>${project.build.directory}/generated-sources/kotlin</output>-->
-                    <!--                            <apiPackage>kotlintest.org.openapitools.client.api</apiPackage>-->
-                    <!--                            <modelPackage>kotlintest.org.openapitools.client.model</modelPackage>-->
-                    <!--                            <invokerPackage>kotlintest.org.openapitools.client</invokerPackage>-->
                     <!--                        </configuration>-->
                     <!--                    </execution>-->
+                    <execution>
+                        <id>kotlin</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <!-- specify the swagger yaml -->
+                            <inputSpec>
+                                https://raw.githubusercontent.com/OpenAPITools/openapi-generator/master/modules/openapi-generator/src/test/resources/2_0/petstore.yaml
+                            </inputSpec>
+
+                            <!-- target to generate java client code -->
+                            <generatorName>kotlin</generatorName>
+
+                            <!-- hint: if you want to generate java server code, e.g. based on Spring Boot,
+                                 you can use the following target: <generatorName>spring</generatorName> -->
+
+                            <!-- pass any necessary config options -->
+                            <configOptions>
+                                <serializableModel>true</serializableModel>
+                            </configOptions>
+
+                            <output>${project.build.directory}/generated-sources/kotlin</output>
+                            <apiPackage>kotlintest.org.openapitools.client.api</apiPackage>
+                            <modelPackage>kotlintest.org.openapitools.client.model</modelPackage>
+                            <invokerPackage>kotlintest.org.openapitools.client</invokerPackage>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
             <plugin>

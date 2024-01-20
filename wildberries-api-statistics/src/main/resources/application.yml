@@ -22,3 +22,6 @@ logging:
     org:
       springframework:
         web: DEBUG
+
+auth:
+  token: 'auth_token_wb'
