@@ -32,6 +32,9 @@
         <kotlinJvmTarget>1.8</kotlinJvmTarget>
         <moshi-kotlin.version>1.12.0</moshi-kotlin.version>
         <migbase64.version>2.2</migbase64.version>
+
+        <!--        <spring-cloud.version>2022.0.4</spring-cloud.version>-->
+        <!--        <feign.version>11.7</feign.version>-->
     </properties>
 
     <dependencies>
@@ -48,6 +51,33 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>org.springframework.cloud</groupId>-->
+        <!--            <artifactId>spring-cloud-starter-openfeign</artifactId>-->
+        <!--        </dependency>-->
+        <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-openfeign -->
+        <!--        <dependency>-->
+        <!--            <groupId>org.springframework.cloud</groupId>-->
+        <!--            <artifactId>spring-cloud-starter-openfeign</artifactId>-->
+        <!--            <version>4.1.0</version>-->
+        <!--        </dependency>-->
+
+        <!--        <dependency>-->
+        <!--            <groupId>org.springframework.cloud</groupId>-->
+        <!--            <artifactId>spring-cloud-starter-oauth2</artifactId>-->
+        <!--            <version>2.2.2.RELEASE</version>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>io.github.openfeign</groupId>-->
+        <!--            <artifactId>feign-hystrix</artifactId>-->
+        <!--            <version>${feign.version}</version>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>io.github.openfeign</groupId>-->
+        <!--            <artifactId>feign-jackson</artifactId>-->
+        <!--            <version>${feign.version}</version>-->
+        <!--        </dependency>-->
+
         <!--        <dependency>-->
         <!--            <groupId>org.springframework.boot</groupId>-->
         <!--            <artifactId>spring-boot-starter-security</artifactId>-->
@@ -256,6 +286,17 @@
             <version>4.2.2</version>
         </dependency>
 
+        <!--        <dependency>-->
+        <!--            <groupId>org.springframework.boot</groupId>-->
+        <!--            <artifactId>spring-boot-autoconfigure</artifactId>-->
+        <!--            <version>3.2.1</version>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.springframework</groupId>-->
+        <!--            <artifactId>spring-test</artifactId>-->
+        <!--            <version>6.1.1</version>-->
+        <!--        </dependency>-->
+
         <!--        &lt;!&ndash; kotlin-stdlib for lowercase, uppercase, etc &ndash;&gt;-->
         <!--        <dependency>-->
         <!--            <groupId>org.jetbrains.kotlin</groupId>-->
@@ -263,6 +304,17 @@
         <!--            <version>${kotlin.version}</version>-->
         <!--        </dependency>-->
     </dependencies>
+    <!--    <dependencyManagement>-->
+    <!--        <dependencies>-->
+    <!--            <dependency>-->
+    <!--                <groupId>org.springframework.cloud</groupId>-->
+    <!--                <artifactId>spring-cloud-dependencies</artifactId>-->
+    <!--                <version>${spring-cloud.version}</version>-->
+    <!--                <type>pom</type>-->
+    <!--                <scope>import</scope>-->
+    <!--            </dependency>-->
+    <!--        </dependencies>-->
+    <!--    </dependencyManagement>-->
 
     <build>
         <sourceDirectory>${project.basedir}/src/main/kotlin</sourceDirectory>
@@ -370,43 +422,56 @@
 
                             <!-- hint: if you want to generate kotlin server code, e.g. based on Spring Boot,
                                  you can use the following generator: <generatorName>kotlin-spring</generatorName> -->
+                            <!--                            <library>spring-boot</library>-->
+                            <!--                            <library>jvm-spring-webclient</library>-->
+                            <!--                            todo-->
+                            <generateApiTests>true</generateApiTests>
+                            <generateModelTests>false</generateModelTests>
+                            <!--                            <generateSupportingFiles>false</generateSupportingFiles>-->
 
                             <!-- pass any necessary config options -->
                             <configOptions>
                                 <serializableModel>true</serializableModel>
+                                <!--                            todo-->
+                                <generateForOpenFeign>true</generateForOpenFeign>
+                                <serializationLibrary>jackson</serializationLibrary>
+
+                                <!--                            todo-->
+                                <!--                                <dateLibrary>legacy</dateLibrary>-->
+                                <!--                                <defaultInterfaces>false</defaultInterfaces>-->
                             </configOptions>
 
                         </configuration>
                     </execution>
-                    <execution>
-                        <id>kotlin</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <configuration>
-                            <!-- specify the swagger yaml -->
-                            <inputSpec>
-                                https://raw.githubusercontent.com/OpenAPITools/openapi-generator/master/modules/openapi-generator/src/test/resources/2_0/petstore.yaml
-                            </inputSpec>
+                    <!--                    <execution>-->
+                    <!--                        <id>kotlin</id>-->
+                    <!--                        <phase>generate-sources</phase>-->
+                    <!--                        <goals>-->
+                    <!--                            <goal>generate</goal>-->
+                    <!--                        </goals>-->
+                    <!--                        <configuration>-->
+                    <!--                            &lt;!&ndash; specify the swagger yaml &ndash;&gt;-->
+                    <!--                            <inputSpec>-->
+                    <!--                                https://raw.githubusercontent.com/OpenAPITools/openapi-generator/master/modules/openapi-generator/src/test/resources/2_0/petstore.yaml-->
+                    <!--                            </inputSpec>-->
 
-                            <!-- target to generate java client code -->
-                            <generatorName>kotlin</generatorName>
+                    <!--                            &lt;!&ndash; target to generate java client code &ndash;&gt;-->
+                    <!--                            <generatorName>kotlin</generatorName>-->
 
-                            <!-- hint: if you want to generate java server code, e.g. based on Spring Boot,
-                                 you can use the following target: <generatorName>spring</generatorName> -->
+                    <!--                            &lt;!&ndash; hint: if you want to generate java server code, e.g. based on Spring Boot,-->
+                    <!--                                 you can use the following target: <generatorName>spring</generatorName> &ndash;&gt;-->
 
-                            <!-- pass any necessary config options -->
-                            <configOptions>
-                                <serializableModel>true</serializableModel>
-                            </configOptions>
+                    <!--                            &lt;!&ndash; pass any necessary config options &ndash;&gt;-->
+                    <!--                            <configOptions>-->
+                    <!--                                <serializableModel>true</serializableModel>-->
+                    <!--                            </configOptions>-->
 
-                            <output>${project.build.directory}/generated-sources/kotlin</output>
-                            <apiPackage>kotlintest.org.openapitools.client.api</apiPackage>
-                            <modelPackage>kotlintest.org.openapitools.client.model</modelPackage>
-                            <invokerPackage>kotlintest.org.openapitools.client</invokerPackage>
-                        </configuration>
-                    </execution>
+                    <!--                            <output>${project.build.directory}/generated-sources/kotlin</output>-->
+                    <!--                            <apiPackage>kotlintest.org.openapitools.client.api</apiPackage>-->
+                    <!--                            <modelPackage>kotlintest.org.openapitools.client.model</modelPackage>-->
+                    <!--                            <invokerPackage>kotlintest.org.openapitools.client</invokerPackage>-->
+                    <!--                        </configuration>-->
+                    <!--                    </execution>-->
                 </executions>
             </plugin>
             <plugin>
@@ -419,11 +484,6 @@
                     <proc>none</proc>
                 </configuration>
             </plugin>
-            <!--            <plugin>-->
-            <!--                <artifactId>kotlin-maven-plugin</artifactId>-->
-            <!--                <groupId>org.jetbrains.kotlin</groupId>-->
-            <!--                -->
-            <!--            </plugin>-->
         </plugins>
         <pluginManagement>
             <plugins>
