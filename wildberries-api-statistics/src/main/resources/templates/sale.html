@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div>
+    <a th:href="@{/}">меню</a>
+</div>
+<div>
+    Продажи и возвраты.
+    <table border="collapse">
+        <ul>
+            <tr>
+                <td>
+                    <li><b>Дата и время продажи:</b></li>
+                </td>
+                <td><b>Артикул WB:</b></td>
+                <td><b>Баркод:</b></td>
+                <td><b>Категория:</b></td>
+                <td><b>Предмет:</b></td>
+                <td><b>Бренд:</b></td>
+                <td><b>Размер товара:</b></td>
+                <td><b>Фактическая цена:</b></td>
+                <td><b>Тип заказа:</b></td>
+            </tr>
+            <tr th:each="sale : ${sales}">
+                <td>
+                    <li th:text="${sale.date}"></li>
+                </td>
+                <td th:text="${sale.nmId}"></td>
+                <td th:text="${sale.barcode}"></td>
+                <td th:text="${sale.category}"></td>
+                <td th:text="${sale.subject}"></td>
+                <td th:text="${sale.brand}"></td>
+                <td th:text="${sale.techSize}"></td>
+                <td th:text="${sale.finishedPrice}"></td>
+                <td th:text="${sale.orderType}"></td>
+            </tr>
+        </ul>
+    </table>
+</div>
+</body>
+</html>

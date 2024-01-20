@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<div>
+    <a th:href="@{/}">меню</a>
+</div>
+<div>
+    Заказы.
+    <table border="collapse">
+        <ul>
+            <tr>
+                <td>
+                    <li><b>Дата и время заказа:</b></li>
+                </td>
+                <td><b>Артикул WB:</b></td>
+                <td><b>Баркод:</b></td>
+                <td><b>Категория:</b></td>
+                <td><b>Предмет:</b></td>
+                <td><b>Бренд:</b></td>
+                <td><b>Размер товара:</b></td>
+                <td><b>Фактическая цена:</b></td>
+                <td><b>Тип заказа:</b></td>
+            </tr>
+            <tr th:each="order : ${orders}">
+                <td>
+                    <li th:text="${order.date}"></li>
+                </td>
+                <td th:text="${order.nmId}"></td>
+                <td th:text="${order.barcode}"></td>
+                <td th:text="${order.category}"></td>
+                <td th:text="${order.subject}"></td>
+                <td th:text="${order.brand}"></td>
+                <td th:text="${order.techSize}"></td>
+                <td th:text="${order.finishedPrice}"></td>
+                <td th:text="${order.orderType}"></td>
+            </tr>
+        </ul>
+    </table>
+</div>
+</body>
+</html>

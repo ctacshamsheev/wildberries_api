@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<div>
+    <a th:href="@{/}">меню</a>
+</div>
+<div>
+    Остатки товаров на складах WB.
+    <table border="collapse">
+        <ul>
+            <tr>
+                <td>
+                    <li><b>Название склада:</b></li>
+                </td>
+                <td><b>Артикул WB:</b></td>
+                <td><b>Баркод:</b></td>
+                <td><b>Количество:</b></td>
+                <td><b>Категория:</b></td>
+                <td><b>Предмет:</b></td>
+                <td><b>Бренд:</b></td>
+                <td><b>Размер:</b></td>
+                <td><b>Цена:</b></td>
+            </tr>
+            <tr th:each="stock : ${stocks}">
+                <td>
+                    <li th:text="${stock.warehouseName}"></li>
+                </td>
+                <td th:text="${stock.nmId}"></td>
+                <td th:text="${stock.barcode}"></td>
+                <td th:text="${stock.quantity}"></td>
+                <td th:text="${stock.category}"></td>
+                <td th:text="${stock.subject}"></td>
+                <td th:text="${stock.brand}"></td>
+                <td th:text="${stock.techSize}"></td>
+                <td th:text="${stock.price}"></td>
+            </tr>
+        </ul>
+    </table>
+</div>
+</body>
+</html>

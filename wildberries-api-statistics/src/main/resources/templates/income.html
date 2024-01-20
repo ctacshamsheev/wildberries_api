@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<div>
+    <a th:href="@{/}">меню</a>
+</div>
+<div>
+    Поставки.
+    <table border="collapse">
+        <ul>
+            <tr>
+                <td>
+                    <li><b>Номер поставки:</b></li>
+                </td>
+                <td><b>Номер УПД:</b></td>
+                <td><b>Дата поступления:</b></td>
+                <td><b>обновления информации:</b></td>
+                <td><b>Артикул продавца:</b></td>
+                <td><b>Размер товара:</b></td>
+                <td><b>Баркод:</b></td>
+                <td><b>Количество:</b></td>
+                <td><b>Цена из УПД:</b></td>
+                <td><b>Дата принятия:</b></td>
+                <td><b>Название склада:</b></td>
+                <td><b>Артикул WB:</b></td>
+                <td><b>Текущий статус:</b></td>
+            </tr>
+            <tr th:each="income : ${incomes}">
+                <td>
+                    <li th:text="${income.date}"></li>
+                </td>
+                <td th:text="${income.number}"></td>
+                <td th:text="${income.date}"></td>
+                <td th:text="${income.lastChangeDate}"></td>
+                <td th:text="${income.supplierArticle}"></td>
+                <td th:text="${income.techSize}"></td>
+                <td th:text="${income.barcode}"></td>
+                <td th:text="${income.quantity}"></td>
+                <td th:text="${income.totalPrice}"></td>
+                <td th:text="${income.dateClose}"></td>
+                <td th:text="${income.warehouseName}"></td>
+                <td th:text="${income.nmId}"></td>
+                <td th:text="${income.status}"></td>
+            </tr>
+        </ul>
+    </table>
+</div>
+</body>
+</html>
