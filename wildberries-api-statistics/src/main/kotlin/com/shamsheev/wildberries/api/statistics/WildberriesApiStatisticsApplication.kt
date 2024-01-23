@@ -11,6 +11,5 @@ import org.springframework.boot.web.servlet.ServletComponentScan
 class WildberriesApiStatisticsApplication
 
 fun main(args: Array<String>) {
-    println("привет");
     runApplication<WildberriesApiStatisticsApplication>(*args)
 }

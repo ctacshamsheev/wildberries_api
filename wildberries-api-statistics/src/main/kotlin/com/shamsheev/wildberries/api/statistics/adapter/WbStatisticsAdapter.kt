@@ -58,6 +58,8 @@ class WbStatisticsAdapter(
         try {
             val results = api.apiV1SupplierOrdersGet(dateFrom.toString(), flag)
             log.info { "$GET_ORDERS?dateFrom=${dateFrom}&flag=${flag} return: ${results.size} records" }
+
+            results.forEach { w -> log.info { w } }
             return results
         } catch (ex: Exception) {
             log.error { "Error $GET_ORDERS?dateFrom=${dateFrom}&flag=${flag}: ${ex.message} ${ex.stackTrace}" }

@@ -19,7 +19,9 @@ internal class NoteRepositoryImplTest {
     @Test
     fun saveAndGetById() {
         //given
-        val note = Note(name = "name1", address = "address1", phone = "phone1")
+        var note = Note(name = "name1", address = "address2", phone = "______")
+        repository.save(note)
+        note = Note(name = "name1", address = "", phone = "phone1")
         repository.save(note)
         //when
         val result = repository.getNoteById(note.id!!)

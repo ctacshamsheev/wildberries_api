@@ -9,8 +9,8 @@ spring:
       hibernate:
         dialect: 'org.hibernate.dialect.PostgreSQLDialect'
         show_sql: true
-        ddl-auto: update
-      generate-ddl: true
+        ddl-auto: none
+      generate-ddl: false
   datasource:
     driverClassName: 'org.postgresql.Driver'
     username: 'postgres'

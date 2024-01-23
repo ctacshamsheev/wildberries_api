@@ -3,9 +3,5 @@ databaseChangeLog:
       file: db/changelog/init.sql
   - include:
       file: db/changelog/create_sequence.sql
-#  - include:
-#      file: /src/main/resources/fill_table_account.sql
-
-
-#
-#  CREATE SEQUENCE hibernate_sequence START 1;
+  - include:
+      file: db/changelog/create_product.sql

@@ -1,0 +1,26 @@
+create TABLE IF NOT EXISTS order_table
+(
+    sr_id               varchar(255) not null,
+    cancel_date         timestamp,
+    country_name        varchar(255),
+    order_date          timestamp,
+    discount_percent    integer,
+    finish_price        numeric(19, 2),
+    g_number            varchar(255),
+    income_id           integer,
+    is_cancel           boolean,
+    is_realization      boolean,
+    is_supply           boolean,
+    last_change_date    timestamp,
+    oblast_name         varchar(255),
+    order_type          varchar(255),
+    price_with_discount numeric(19, 2),
+    region_name         varchar(255),
+    sale_price          numeric(19, 2),
+    sticker             varchar(255),
+    total_price         numeric(19, 2),
+    warehouse_name      varchar(255),
+    product_id          bigint,
+    primary key (sr_id),
+    CONSTRAINT FK_order_product_id FOREIGN KEY (product_id) REFERENCES product_table (id)
+);
