@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository
 import java.util.*
 
 @Repository
-interface ProductRepository : CrudRepository<Product, Long> {
-    fun getProductById(id: Long): Optional<Product>
+interface ProductRepository : CrudRepository<Product, String> {
+    fun getProductById(id: String): Optional<Product>
 }

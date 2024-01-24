@@ -9,6 +9,7 @@ import java.util.*
 @Repository
 interface OrderRepository : CrudRepository<Order, String> {
 
+    fun existsBySrId(id: String?): Boolean
     fun getOrderBySrId(id: String): Optional<Order>
 
     fun getOrdersByProduct(product: Product): List<Order>

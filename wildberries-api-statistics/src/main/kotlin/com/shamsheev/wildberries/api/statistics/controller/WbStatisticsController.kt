@@ -36,6 +36,7 @@ class WbStatisticsController(
         val dateFrom = dateTime ?: LocalDateTime.now().minusDays(5)
         val flag = int ?: 1
         val results = wbStatistics.getOrders(dateFrom, flag)
+        results.forEach { order -> orderService.save(order) }
 // TODO
 //        results.map { order ->
 //            orderService.save(Order(srId = order.srid, date = order.date, lastChangeDate = order.lastChangeDate))

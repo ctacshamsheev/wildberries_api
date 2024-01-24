@@ -4,5 +4,5 @@ create TABLE IF NOT EXISTS note_table
     name    varchar(255),
     address varchar(255),
     phone   varchar(255),
-    CONSTRAINT note PRIMARY KEY (id)
+    PRIMARY KEY (id)
 );

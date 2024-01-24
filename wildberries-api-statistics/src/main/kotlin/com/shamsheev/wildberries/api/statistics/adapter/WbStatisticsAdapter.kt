@@ -1,6 +1,8 @@
 package com.shamsheev.wildberries.api.statistics.adapter
 
 import com.shamsheev.wildberries.api.statistics.GetApiException
+import com.shamsheev.wildberries.api.statistics.model.Order
+import com.shamsheev.wildberries.api.statistics.model.Product
 import com.shamsheev.wildberries.api.statistics.ports.WbStatistics
 import mu.KotlinLogging
 import openapi.wildberries.ru.statistics.apis.DefaultApi
@@ -53,14 +55,16 @@ class WbStatisticsAdapter(
     override fun getOrders(
         dateFrom: LocalDateTime,
         flag: Int,
-    ): List<OrdersItem> {
+    ): List<Order> {
         log.info { "$GET_ORDERS?dateFrom=${dateFrom}&flag=${flag}" }
         try {
             val results = api.apiV1SupplierOrdersGet(dateFrom.toString(), flag)
             log.info { "$GET_ORDERS?dateFrom=${dateFrom}&flag=${flag} return: ${results.size} records" }
 
             results.forEach { w -> log.info { w } }
-            return results
+            return results.map { ordersItem -> ordersItem.toOrder() }
+                .toList()
+
         } catch (ex: Exception) {
             log.error { "Error $GET_ORDERS?dateFrom=${dateFrom}&flag=${flag}: ${ex.message} ${ex.stackTrace}" }
             throw GetApiException("Error $GET_ORDERS?dateFrom=${dateFrom}&flag=${flag}: ${ex.message}")
@@ -100,4 +104,39 @@ class WbStatisticsAdapter(
     companion object {
         val log = KotlinLogging.logger {}
     }
+
+
+    fun OrdersItem.toOrder() = Order(
+        srId = srid,
+        date = date,
+        lastChangeDate = lastChangeDate,
+        warehouseName = warehouseName,
+        countryName = countryName,
+        oblastName = oblastOkrugName,
+        regionName = regionName,
+        product = Product(
+            id = barcode!!,
+            supId = supplierArticle!!,
+            wbId = nmId!!.toLong(),
+            category = category,
+            subject = subject,
+            brand = brand,
+            size = techSize,
+
+            ),
+        incomeId = incomeID,
+        isSupply = isSupply,
+        isRealization = isRealization,
+        totalPrice = totalPrice,
+        discountPercent = discountPercent,
+        salePrice = spp,
+        finishPrice = finishedPrice,
+        priceWithDiscount = priceWithDisc,
+        isCancel = isCancel,
+        cancelDate = cancelDate,
+        orderType = orderType,
+        sticker = sticker,
+        gNumber = gNumber,
+    )
+
 }

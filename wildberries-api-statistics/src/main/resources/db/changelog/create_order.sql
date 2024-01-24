@@ -20,7 +20,7 @@ create TABLE IF NOT EXISTS order_table
     sticker             varchar(255),
     total_price         numeric(19, 2),
     warehouse_name      varchar(255),
-    product_id          bigint,
+    product_id          varchar(255),
     primary key (sr_id),
     CONSTRAINT FK_order_product_id FOREIGN KEY (product_id) REFERENCES product_table (id)
 );

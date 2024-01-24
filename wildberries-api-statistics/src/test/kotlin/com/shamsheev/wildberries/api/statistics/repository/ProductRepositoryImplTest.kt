@@ -18,7 +18,7 @@ internal class ProductRepositoryImplTest {
     @Test
     fun saveAndGetById() {
         //given
-        val product = Product(2106904170120128, "11619197", 11619197, "Одежда", "Блузки", "Luxury Plus", "60")
+        val product = Product("2106904170120128", "11619197", 11619197, "Одежда", "Блузки", "Luxury Plus", "60")
 
         repository.save(product)
         //when

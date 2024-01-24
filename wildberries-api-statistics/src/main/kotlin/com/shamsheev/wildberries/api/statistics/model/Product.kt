@@ -20,7 +20,7 @@ import javax.persistence.Table
 data class Product(
     @Id
     @Column(name = "id")
-    var id: Long,
+    var id: String,
 
     @Column(name = "sup_id")
     var supId: String,
@@ -32,11 +32,11 @@ data class Product(
     var category: String?,
 
     @Column(name = "subject")
-    var subject: String,
+    var subject: String?,
 
     @Column(name = "brand")
-    var brand: String,
+    var brand: String?,
 
     @Column(name = "size")
-    var size: String,
+    var size: String?,
 )

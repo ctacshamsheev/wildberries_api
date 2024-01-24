@@ -1,6 +1,6 @@
 create TABLE IF NOT EXISTS product_table
 (
-    id       bigint not null,
+    id       varchar(255),
     brand    varchar(255),
     category varchar(255),
     size     varchar(255),
