@@ -14,6 +14,7 @@ import javax.persistence.Table
  * @param brand Бренд
  * @param techSize Размер товара
  */
+
 @Entity
 @Table(name = "product_table")
 data class Product(

@@ -34,7 +34,6 @@ import javax.persistence.*
  * @param srid Уникальный идентификатор заказа.<br> Примечание для использующих API Маркетплейс: `srid` равен `rid` в ответах методов сборочных заданий.
  */
 
-//@Builder
 @Entity
 @Table(name = "order_table")
 data class Order(
