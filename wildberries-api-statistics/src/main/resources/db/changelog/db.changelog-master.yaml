@@ -7,3 +7,5 @@ databaseChangeLog:
       file: db/changelog/create_product.sql
   - include:
       file: db/changelog/create_order.sql
+  - include:
+      file: db/changelog/create_sale.sql

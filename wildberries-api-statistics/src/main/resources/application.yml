@@ -27,4 +27,4 @@ wildberries:
   statistics:
     url: 'https://statistics-api.wildberries.ru/'
     auth:
-      token: 'wb_key'
+      token: 'eyJhbGciOiJFUzI1NiIsImtpZCI6IjIwMjMxMDI1djEiLCJ0eXAiOiJKV1QifQ.eyJlbnQiOjEsImV4cCI6MTcxNTc5NzA2MiwiaWQiOiI5MmE5MzVlNy0xZjIyLTRiNzctODM2ZC04ZGE2MGZkN2Q1NjciLCJpaWQiOjMxMzk0NzU4LCJvaWQiOjE2MzA5LCJzIjozMiwic2lkIjoiNDAwOWI1ZTYtZjk2OC01NTJkLTkzMGQtM2M0YTk5YzBkNjhjIiwidWlkIjozMTM5NDc1OH0.FTgUkhAQF7CvgTFBcSbVCyA6XuiL2ynqWB2gYN8cTLLSzGuQGPKXWbe1OOSmTsfxiBrX1zEGrZ00hUaxnd2WPA'

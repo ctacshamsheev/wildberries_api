@@ -3,6 +3,7 @@ package com.shamsheev.wildberries.api.statistics.adapter
 import com.shamsheev.wildberries.api.statistics.GetApiException
 import com.shamsheev.wildberries.api.statistics.model.Order
 import com.shamsheev.wildberries.api.statistics.model.Product
+import com.shamsheev.wildberries.api.statistics.model.Sale
 import com.shamsheev.wildberries.api.statistics.ports.WbStatistics
 import mu.KotlinLogging
 import openapi.wildberries.ru.statistics.apis.DefaultApi
@@ -62,7 +63,7 @@ class WbStatisticsAdapter(
             log.info { "$GET_ORDERS?dateFrom=${dateFrom}&flag=${flag} return: ${results.size} records" }
 
             results.forEach { w -> log.info { w } }
-            return results.map { ordersItem -> ordersItem.toOrder() }
+            return results.map { orderItem -> orderItem.toOrder() }
                 .toList()
 
         } catch (ex: Exception) {
@@ -74,12 +75,16 @@ class WbStatisticsAdapter(
     override fun getSales(
         dateFrom: LocalDateTime,
         flag: Int,
-    ): List<SalesItem> {
+    ): List<Sale> {
         log.info { "$GET_SALES?dateFrom=${dateFrom}&flag=${flag}" }
         try {
             val results = api.apiV1SupplierSalesGet(dateFrom.toString(), flag)
             log.info { "$GET_SALES?dateFrom=${dateFrom}&flag=${flag} return: ${results.size} records" }
-            return results
+
+            results.forEach { w -> log.info { w } }
+            return results.map { saleItem -> saleItem.toSale() }
+                .toList()
+
         } catch (ex: Exception) {
             log.error { "Error $GET_SALES?dateFrom=${dateFrom}&flag=${flag}: ${ex.message} ${ex.stackTrace}" }
             throw GetApiException("Error $GET_SALES?dateFrom=${dateFrom}&flag=${flag}: ${ex.message}")
@@ -122,8 +127,7 @@ class WbStatisticsAdapter(
             subject = subject,
             brand = brand,
             size = techSize,
-
-            ),
+        ),
         incomeId = incomeID,
         isSupply = isSupply,
         isRealization = isRealization,
@@ -134,6 +138,38 @@ class WbStatisticsAdapter(
         priceWithDiscount = priceWithDisc,
         isCancel = isCancel,
         cancelDate = cancelDate,
+        orderType = orderType,
+        sticker = sticker,
+        gNumber = gNumber,
+    )
+
+    fun SalesItem.toSale() = Sale(
+        srId = srid,
+        date = date,
+        lastChangeDate = lastChangeDate,
+        warehouseName = warehouseName,
+        countryName = countryName,
+        oblastName = oblastOkrugName,
+        regionName = regionName,
+        product = Product(
+            id = barcode!!,
+            supId = supplierArticle!!,
+            wbId = nmId!!.toLong(),
+            category = category,
+            subject = subject,
+            brand = brand,
+            size = techSize,
+        ),
+        incomeId = incomeID,
+        isSupply = isSupply,
+        isRealization = isRealization,
+        totalPrice = totalPrice,
+        discountPercent = discountPercent,
+        salePrice = spp,
+        forPay = forPay,
+        finishPrice = finishedPrice,
+        priceWithDiscount = priceWithDisc,
+        saleId = saleID,
         orderType = orderType,
         sticker = sticker,
         gNumber = gNumber,
