@@ -15,8 +15,12 @@ class OrderService(
 ) {
     @Transactional
     fun save(order: Order) {
-        productService.save(order.product)
+        productService.saveIfNotExist(order.product)
         if (!orderRepository.existsBySrId(order.srId))
             orderRepository.save(order)
+    }
+
+    fun save(ordersList: List<Order>) {
+        ordersList.forEach(::save)
     }
 }

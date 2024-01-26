@@ -9,3 +9,5 @@ databaseChangeLog:
       file: db/changelog/create_order.sql
   - include:
       file: db/changelog/create_sale.sql
+  - include:
+      file: db/changelog/create_stock.sql

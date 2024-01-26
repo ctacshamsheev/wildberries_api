@@ -1,9 +1,10 @@
 package com.shamsheev.wildberries.api.statistics.adapter
 
-import com.shamsheev.wildberries.api.statistics.GetApiException
+import com.shamsheev.wildberries.api.statistics.exception.GetApiException
 import com.shamsheev.wildberries.api.statistics.model.Order
 import com.shamsheev.wildberries.api.statistics.model.Product
 import com.shamsheev.wildberries.api.statistics.model.Sale
+import com.shamsheev.wildberries.api.statistics.model.Stock
 import com.shamsheev.wildberries.api.statistics.ports.WbStatistics
 import mu.KotlinLogging
 import openapi.wildberries.ru.statistics.apis.DefaultApi
@@ -41,12 +42,16 @@ class WbStatisticsAdapter(
 
     override fun getStocks(
         dateFrom: LocalDateTime,
-    ): List<StocksItem> {
+    ): List<Stock> {
         log.info { "$GET_STOCKS?dateFrom=${dateFrom}" }
         try {
             val results = api.apiV1SupplierStocksGet(dateFrom.toString())
             log.info { "$GET_STOCKS?dateFrom=${dateFrom} return: ${results.size} records" }
-            return results
+
+            results.forEach { w -> log.info { w } }
+            return results.map { stockItem -> stockItem.toStock() }
+                .toList()
+
         } catch (ex: Exception) {
             log.error { "Error $GET_STOCKS?dateFrom=${dateFrom}: ${ex.message} ${ex.stackTrace}" }
             throw GetApiException("Error $GET_STOCKS?dateFrom=${dateFrom}: ${ex.message}")
@@ -173,6 +178,29 @@ class WbStatisticsAdapter(
         orderType = orderType,
         sticker = sticker,
         gNumber = gNumber,
+    )
+
+    fun StocksItem.toStock() = Stock(
+        lastChangeDate = lastChangeDate,
+        warehouseName = warehouseName,
+        product = Product(
+            id = barcode!!,
+            supId = supplierArticle!!,
+            wbId = nmId!!.toLong(),
+            category = category,
+            subject = subject,
+            brand = brand,
+            size = techSize,
+        ),
+        quantity = quantity,
+        inWayToClient = inWayToClient,
+        inWayFromClient = inWayFromClient,
+        quantityFull = quantityFull,
+        price = price,
+        discount = discount,
+        isSupply = isSupply,
+        isRealization = isRealization,
+        scCode = scCode,
     )
 
 }

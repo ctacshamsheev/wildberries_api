@@ -13,12 +13,16 @@ class ProductService(
     val productRepository: ProductRepository,
 ) {
     @Transactional
-    fun save(product: Product) {
+    fun saveIfNotExist(product: Product) {
         val productOptional = productRepository.getProductById(product.id)
         if (!productOptional.isPresent
-            || (Objects.isNull(productOptional.get().category) && (!Objects.isNull(product)))
+            || (Objects.isNull(productOptional.get().category) && (!Objects.isNull(product.category)))
         ) {
             productRepository.save(product)
         }
+    }
+
+    fun saveIfNotExist(productsList: List<Product>) {
+        productsList.forEach(::saveIfNotExist)
     }
 }

@@ -11,7 +11,7 @@ import org.springframework.test.context.ActiveProfiles
 internal class OrderRepositoryImplTest {
 
     @Autowired
-    private lateinit var repository: OrderRepository
+    private lateinit var repository: StockRepository
 
     @Test
     fun saveAndGetById() {
