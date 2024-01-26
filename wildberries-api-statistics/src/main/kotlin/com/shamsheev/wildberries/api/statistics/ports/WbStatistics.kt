@@ -1,16 +1,16 @@
 package com.shamsheev.wildberries.api.statistics.ports
 
+import com.shamsheev.wildberries.api.statistics.model.Income
 import com.shamsheev.wildberries.api.statistics.model.Order
 import com.shamsheev.wildberries.api.statistics.model.Sale
 import com.shamsheev.wildberries.api.statistics.model.Stock
 import openapi.wildberries.ru.statistics.models.DetailReportItem
-import openapi.wildberries.ru.statistics.models.IncomesItem
 import java.time.LocalDate
 import java.time.LocalDateTime
 
 interface WbStatistics {
 
-    fun getIncomes(dateFrom: LocalDateTime): List<IncomesItem>
+    fun getIncomes(dateFrom: LocalDateTime): List<Income>
 
     fun getStocks(dateFrom: LocalDateTime): List<Stock>
 

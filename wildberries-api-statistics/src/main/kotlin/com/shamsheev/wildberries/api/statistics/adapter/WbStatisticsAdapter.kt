@@ -1,10 +1,7 @@
 package com.shamsheev.wildberries.api.statistics.adapter
 
 import com.shamsheev.wildberries.api.statistics.exception.GetApiException
-import com.shamsheev.wildberries.api.statistics.model.Order
-import com.shamsheev.wildberries.api.statistics.model.Product
-import com.shamsheev.wildberries.api.statistics.model.Sale
-import com.shamsheev.wildberries.api.statistics.model.Stock
+import com.shamsheev.wildberries.api.statistics.model.*
 import com.shamsheev.wildberries.api.statistics.ports.WbStatistics
 import mu.KotlinLogging
 import openapi.wildberries.ru.statistics.apis.DefaultApi
@@ -28,12 +25,16 @@ class WbStatisticsAdapter(
 
     override fun getIncomes(
         dateFrom: LocalDateTime,
-    ): List<IncomesItem> {
+    ): List<Income> {
         log.info { "$GET_INCOMES?dateFrom=${dateFrom}" }
         try {
             val results = api.apiV1SupplierIncomesGet(dateFrom.toString())
             log.info { "$GET_INCOMES?dateFrom=${dateFrom} return: ${results.size} records" }
-            return results
+
+            results.forEach { w -> log.debug { w } }
+            return results.map { incomeItem -> incomeItem.toIncome() }
+                .toList()
+
         } catch (ex: Exception) {
             log.error { "Error $GET_INCOMES?dateFrom=${dateFrom}: ${ex.message} ${ex.stackTrace}" }
             throw GetApiException("Error $GET_INCOMES?dateFrom=${dateFrom}: ${ex.message}")
@@ -48,7 +49,7 @@ class WbStatisticsAdapter(
             val results = api.apiV1SupplierStocksGet(dateFrom.toString())
             log.info { "$GET_STOCKS?dateFrom=${dateFrom} return: ${results.size} records" }
 
-            results.forEach { w -> log.info { w } }
+            results.forEach { w -> log.debug { w } }
             return results.map { stockItem -> stockItem.toStock() }
                 .toList()
 
@@ -67,7 +68,7 @@ class WbStatisticsAdapter(
             val results = api.apiV1SupplierOrdersGet(dateFrom.toString(), flag)
             log.info { "$GET_ORDERS?dateFrom=${dateFrom}&flag=${flag} return: ${results.size} records" }
 
-            results.forEach { w -> log.info { w } }
+            results.forEach { w -> log.debug { w } }
             return results.map { orderItem -> orderItem.toOrder() }
                 .toList()
 
@@ -86,7 +87,7 @@ class WbStatisticsAdapter(
             val results = api.apiV1SupplierSalesGet(dateFrom.toString(), flag)
             log.info { "$GET_SALES?dateFrom=${dateFrom}&flag=${flag} return: ${results.size} records" }
 
-            results.forEach { w -> log.info { w } }
+            results.forEach { w -> log.debug { w } }
             return results.map { saleItem -> saleItem.toSale() }
                 .toList()
 
@@ -201,6 +202,28 @@ class WbStatisticsAdapter(
         isSupply = isSupply,
         isRealization = isRealization,
         scCode = scCode,
+    )
+
+
+    fun IncomesItem.toIncome() = Income(
+        incomeId = incomeId,
+        number = number,
+        date = date,
+        lastChangeDate = lastChangeDate,
+        product = Product(
+            id = barcode!!,
+            supId = supplierArticle!!,
+            wbId = nmId!!.toLong(),
+            category = null,
+            subject = null,
+            brand = null,
+            size = techSize,
+        ),
+        quantity = quantity,
+        totalPrice = totalPrice,
+        dateClose = dateClose,
+        warehouseName = warehouseName,
+        status = status?.value,
     )
 
 }

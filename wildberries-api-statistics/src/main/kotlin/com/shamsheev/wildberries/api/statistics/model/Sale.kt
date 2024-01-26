@@ -61,7 +61,7 @@ data class Sale(
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "product_id")
-    val product: Product,
+    var product: Product,
 
     @Column(name = "income_id")
     val incomeId: Int? = null,

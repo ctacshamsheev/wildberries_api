@@ -1,6 +1,7 @@
 package com.shamsheev.wildberries.api.statistics.controller
 
 import com.shamsheev.wildberries.api.statistics.ports.WbStatistics
+import com.shamsheev.wildberries.api.statistics.service.IncomeService
 import com.shamsheev.wildberries.api.statistics.service.OrderService
 import com.shamsheev.wildberries.api.statistics.service.SaleService
 import com.shamsheev.wildberries.api.statistics.service.StockService
@@ -20,19 +21,23 @@ class WbStatisticsController(
     val orderService: OrderService,
     val saleService: SaleService,
     val stockService: StockService,
+    val incomeService: IncomeService,
 ) {
 
     @GetMapping("/incomes")
     fun incomes(@RequestBody dateTime: LocalDateTime?, model: Model): String {
         val dateFrom = dateTime ?: LocalDateTime.now().minusDays(30)
         val results = wbStatistics.getIncomes(dateFrom)
+        incomeService.save(results)
         model.addAttribute("incomes", results)
         return "income"
     }
 
     @GetMapping("/stocks")
     fun stocks(@RequestBody dateTime: LocalDateTime?, model: Model): String {
-        val dateFrom = dateTime ?: LocalDateTime.now().minusYears(3)
+//        val dateFrom = dateTime ?: LocalDateTime.now().minusYears(3)
+        // TODO !!
+        val dateFrom = dateTime ?: LocalDateTime.now().minusMonths(3)
         val results = wbStatistics.getStocks(dateFrom)
         stockService.save(results)
         model.addAttribute("stocks", results)

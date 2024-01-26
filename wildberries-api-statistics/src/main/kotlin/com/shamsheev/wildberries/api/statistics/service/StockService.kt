@@ -14,11 +14,14 @@ class StockService(
     val productService: ProductService,
 ) {
     @Transactional
+    fun save(stock: Stock) {
+        stock.product = productService.saveIfNotExist(stock.product)
+        stockRepository.save(stock)
+    }
+
+    @Transactional
     fun save(stockList: List<Stock>) {
         stockRepository.deleteAll()
-        stockList.forEach { stock ->
-            productService.saveIfNotExist(stock.product)
-            stockRepository.save(stock)
-        }
+        stockList.forEach(::save)
     }
 }

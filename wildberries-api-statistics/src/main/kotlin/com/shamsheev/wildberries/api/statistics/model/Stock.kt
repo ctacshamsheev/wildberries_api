@@ -40,7 +40,7 @@ data class Stock(
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "product_id")
-    val product: Product,
+    var product: Product,
 
     @Column(name = "quantity")
     val quantity: Int? = null,
