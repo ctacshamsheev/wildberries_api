@@ -17,14 +17,41 @@ spring:
     password: 'postgres'
     url: 'jdbc:postgresql://localhost:5432/db'
 
-logging:
-  level:
-    org:
-      springframework:
-        web: DEBUG
-
 wildberries:
   statistics:
     url: 'https://statistics-api.wildberries.ru/'
     auth:
       token: 'eyJhbGciOiJFUzI1NiIsImtpZCI6IjIwMjMxMDI1djEiLCJ0eXAiOiJKV1QifQ.eyJlbnQiOjEsImV4cCI6MTcxNTc5NzA2MiwiaWQiOiI5MmE5MzVlNy0xZjIyLTRiNzctODM2ZC04ZGE2MGZkN2Q1NjciLCJpaWQiOjMxMzk0NzU4LCJvaWQiOjE2MzA5LCJzIjozMiwic2lkIjoiNDAwOWI1ZTYtZjk2OC01NTJkLTkzMGQtM2M0YTk5YzBkNjhjIiwidWlkIjozMTM5NDc1OH0.FTgUkhAQF7CvgTFBcSbVCyA6XuiL2ynqWB2gYN8cTLLSzGuQGPKXWbe1OOSmTsfxiBrX1zEGrZ00hUaxnd2WPA'
+    orders:
+      startDate: '2024-01-01T00:00:00.0'
+      cron:
+        enabled: true
+        value: '*/10 * * * * *'
+    sales:
+      startDate: '2024-01-01T00:00:00.0'
+      cron:
+        enabled: true
+        value: '30 * * * * *'
+    report:
+      startDate: '2024-01-01T00:00:00.0'
+      cron:
+        enabled: true
+        value: '15 * * * * *'
+    incomes:
+      startDate: '2024-01-01T00:00:00.0'
+      cron:
+        enabled: true
+        value: '45 * * * * *'
+    stocks:
+      startDate: '2020-01-01T00:00:00.0'
+      cron:
+        enabled: true
+        value: '0 * * * * *'
+
+logging:
+  level:
+    com:
+      shamsheev: DEBUG
+    org:
+      springframework:
+        web: DEBUG

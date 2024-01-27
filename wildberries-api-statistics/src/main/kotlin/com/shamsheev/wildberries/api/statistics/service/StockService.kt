@@ -8,10 +8,8 @@ import javax.transaction.Transactional
 
 @Service
 class StockService(
-    @Autowired
-    val stockRepository: StockRepository,
-    @Autowired
-    val productService: ProductService,
+    @Autowired val stockRepository: StockRepository,
+    @Autowired val productService: ProductService,
 ) {
     @Transactional
     fun save(stock: Stock) {
@@ -21,7 +19,7 @@ class StockService(
 
     @Transactional
     fun save(stockList: List<Stock>) {
-        stockRepository.deleteAll()
+//        stockRepository.deleteAll()
         stockList.forEach(::save)
     }
 }

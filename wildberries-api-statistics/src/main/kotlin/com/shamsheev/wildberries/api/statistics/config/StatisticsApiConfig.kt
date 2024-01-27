@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration
 import java.io.IOException
 
 @Configuration
-class StatisticsApi {
+class StatisticsApiConfig {
     @Value("\${wildberries.statistics.url}")
     private var url: String = "default_url"
 

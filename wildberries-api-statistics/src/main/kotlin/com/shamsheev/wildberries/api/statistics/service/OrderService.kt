@@ -16,8 +16,7 @@ class OrderService(
     @Transactional
     fun save(order: Order) {
         order.product = productService.saveIfNotExist(order.product)
-        if (!orderRepository.existsBySrId(order.srId))
-            orderRepository.save(order)
+        orderRepository.save(order)
     }
 
     fun save(ordersList: List<Order>) {
