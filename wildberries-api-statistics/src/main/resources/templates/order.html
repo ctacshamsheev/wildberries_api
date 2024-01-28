@@ -1,42 +1,70 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <body>
 <div>
     <a th:href="@{/}">меню</a>
 </div>
 <div>
     Заказы.
-    <table border="collapse">
-        <ul>
-            <tr>
-                <td>
-                    <li><b>Дата и время заказа:</b></li>
-                </td>
-                <td><b>Уникальный идентификатор заказа:</b></td>
-                <td><b>Артикул WB:</b></td>
-                <td><b>Баркод:</b></td>
-                <td><b>Категория:</b></td>
-                <td><b>Предмет:</b></td>
-                <td><b>Бренд:</b></td>
-                <td><b>Размер товара:</b></td>
-                <td><b>Фактическая цена:</b></td>
-                <td><b>Тип заказа:</b></td>
-            </tr>
-            <tr th:each="order : ${orders}">
-                <td>
-                    <li th:text="${order.date}"></li>
-                </td>
-                <td th:text="${order.srId}"></td>
-                <td th:text="${order.product.wbId}"></td>
-                <td th:text="${order.product.id}"></td>
-                <td th:text="${order.product.category}"></td>
-                <td th:text="${order.product.subject}"></td>
-                <td th:text="${order.product.brand}"></td>
-                <td th:text="${order.product.size}"></td>
-                <td th:text="${order.finishPrice}"></td>
-                <td th:text="${order.orderType}"></td>
-            </tr>
-        </ul>
+    <table>
+        <tr>
+            <td><b>Дата и время заказа:</b></td>
+            <td><b>Дата и время обновления:</b></td>
+            <td><b>Склад отгрузки:</b></td>
+            <td><b>Страна:</b></td>
+            <td><b>Округ:</b></td>
+            <td><b>Регион:</b></td>
+            <td><b>Артикул продавца:</b></td>
+            <td><b>Артикул WB:</b></td>
+            <td><b>Баркод:</b></td>
+            <td><b>Категория:</b></td>
+            <td><b>Предмет:</b></td>
+            <td><b>Бренд:</b></td>
+            <td><b>Размер товара:</b></td>
+            <td><b>Номер поставки:</b></td>
+            <td><b>Договор поставки:</b></td>
+            <td><b>Договор реализации:</b></td>
+            <td><b>Цена без скидок:</b></td>
+            <td><b>Скидка продавца:</b></td>
+            <td><b>Скидка WB:</b></td>
+            <td><b>Фактическая цена:</b></td>
+            <td><b>Цена со скидкой продавца:</b></td>
+            <td><b>Отмена заказа:</b></td>
+            <td><b>Дата и время отмены:</b></td>
+            <td><b>Тип заказа:</b></td>
+            <td><b>Идентификатор стикера:</b></td>
+            <td><b>Номер заказа:</b></td>
+            <td><b>Уникальный идентификатор заказа:</b></td>
+        </tr>
+        <tr th:each="order : ${orders}">
+            <td th:text="${#temporals.format(order.date, 'dd-MM-yyyy HH:mm:ss')}"></td>
+            <td th:text="${#temporals.format(order.lastChangeDate, 'dd-MM-yyyy HH:mm:ss')}"></td>
+            <td th:text="${order.warehouseName}"></td>
+            <td th:text="${order.countryName}"></td>
+            <td th:text="${order.oblastName}"></td>
+            <td th:text="${order.regionName}"></td>
+            <td th:text="${order.product.supId}"></td>
+            <td th:text="${order.product.wbId}"></td>
+            <td th:text="${order.product.id}"></td>
+            <td th:text="${order.product.category}"></td>
+            <td th:text="${order.product.subject}"></td>
+            <td th:text="${order.product.brand}"></td>
+            <td th:text="${order.product.size}"></td>
+            <td th:text="${order.incomeId}"></td>
+            <td th:text="${order.isSupply}"></td>
+            <td th:text="${order.isRealization}"></td>
+            <td th:text="${order.totalPrice}"></td>
+            <td th:text="${order.discountPercent}"></td>
+            <td th:text="${order.salePrice}"></td>
+            <td th:text="${order.finishPrice}"></td>
+            <td th:text="${order.priceWithDiscount}"></td>
+            <td th:text="${order.isCancel}"></td>
+            <td th:text="${#temporals.format(order.cancelDate, 'dd-MM-yyyy HH:mm:ss')}"></td>
+            <td th:text="${order.orderType}"></td>
+            <td th:text="${order.sticker}"></td>
+            <td th:text="${order.gNumber}"></td>
+            <td th:text="${order.srId}"></td>
+        </tr>
     </table>
 </div>
 </body>

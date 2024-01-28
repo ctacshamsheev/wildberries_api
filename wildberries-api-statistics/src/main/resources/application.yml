@@ -8,7 +8,7 @@ spring:
     properties:
       hibernate:
         dialect: 'org.hibernate.dialect.PostgreSQLDialect'
-        show_sql: true
+        show_sql: false
         ddl-auto: none
       generate-ddl: false
   datasource:
@@ -23,30 +23,31 @@ wildberries:
     auth:
       token: 'eyJhbGciOiJFUzI1NiIsImtpZCI6IjIwMjMxMDI1djEiLCJ0eXAiOiJKV1QifQ.eyJlbnQiOjEsImV4cCI6MTcxNTc5NzA2MiwiaWQiOiI5MmE5MzVlNy0xZjIyLTRiNzctODM2ZC04ZGE2MGZkN2Q1NjciLCJpaWQiOjMxMzk0NzU4LCJvaWQiOjE2MzA5LCJzIjozMiwic2lkIjoiNDAwOWI1ZTYtZjk2OC01NTJkLTkzMGQtM2M0YTk5YzBkNjhjIiwidWlkIjozMTM5NDc1OH0.FTgUkhAQF7CvgTFBcSbVCyA6XuiL2ynqWB2gYN8cTLLSzGuQGPKXWbe1OOSmTsfxiBrX1zEGrZ00hUaxnd2WPA'
     orders:
-      startDate: '2024-01-01T00:00:00.0'
+      startDate: '2023-01-01T00:00:00.0'
       cron:
         enabled: true
-        value: '*/10 * * * * *'
+        value: '0 0,30 * * * *'
     sales:
-      startDate: '2024-01-01T00:00:00.0'
+      startDate: '2023-01-01T00:00:00.0'
       cron:
-        enabled: true
-        value: '30 * * * * *'
+        enabled: false
+        value: '0 15,45 * * * *'
     report:
-      startDate: '2024-01-01T00:00:00.0'
+      startDate: '2023-01-01T00:00:00.0'
       cron:
-        enabled: true
-        value: '15 * * * * *'
+        enabled: false
+        value: '0 0 4 * * *'
     incomes:
       startDate: '2024-01-01T00:00:00.0'
       cron:
-        enabled: true
+        enabled: false
         value: '45 * * * * *'
     stocks:
       startDate: '2020-01-01T00:00:00.0'
       cron:
-        enabled: true
+        enabled: false
         value: '0 * * * * *'
+timezone: 4
 
 logging:
   level:

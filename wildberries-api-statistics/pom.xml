@@ -35,6 +35,7 @@
         <kotlinJvmTarget>1.8</kotlinJvmTarget>
         <moshi-kotlin.version>1.12.0</moshi-kotlin.version>
         <migbase64.version>2.2</migbase64.version>
+        <apache.poi.version>4.1.2</apache.poi.version>
 
         <!--        <spring-cloud.version>2022.0.4</spring-cloud.version>-->
         <!--        <feign.version>11.7</feign.version>-->
@@ -323,6 +324,18 @@
         <!--            <artifactId>kotlin-stdlib</artifactId>-->
         <!--            <version>${kotlin.version}</version>-->
         <!--        </dependency>-->
+
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>${apache.poi.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>${apache.poi.version}</version>
+        </dependency>
 
     </dependencies>
     <!--    <dependencyManagement>-->

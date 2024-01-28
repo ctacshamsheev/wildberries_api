@@ -143,7 +143,7 @@ class WbStatisticsAdapter(
         finishPrice = finishedPrice,
         priceWithDiscount = priceWithDisc,
         isCancel = isCancel,
-        cancelDate = cancelDate,
+        cancelDate = if (cancelDate != LocalDateTime.MIN) cancelDate else null,
         orderType = orderType,
         sticker = sticker,
         gNumber = gNumber,

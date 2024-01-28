@@ -8,25 +8,30 @@ import org.springframework.stereotype.Service
 import java.time.LocalDateTime
 
 @Service
-class ApiRequestHandler {
+class ApiRequestHandler(
+    val apiRequestService: ApiRequestService,
+) {
 
     @EventListener(ApiSchedulingEvent::class)
     fun ordersScheduling(event: ApiSchedulingEvent) {
+        val now = LocalDateTime.now();
         when (event.type) {
             ApiType.ORDERS -> {
-                log.info { "ordersScheduling: ${LocalDateTime.now()}" }
+                log.info { "ordersScheduling: $now" }
+                apiRequestService.orders(now)
             }
             ApiType.SALES -> {
-                log.info { "salesScheduling: ${LocalDateTime.now()}" }
+                log.info { "salesScheduling: $now" }
+                apiRequestService.sales(now)
             }
             ApiType.STOCKS -> {
-                log.info { "stocksScheduling: ${LocalDateTime.now()}" }
+                log.info { "stocksScheduling: $now" }
             }
             ApiType.INCOMES -> {
-                log.info { "incomesScheduling: ${LocalDateTime.now()}" }
+                log.info { "incomesScheduling: $now" }
             }
             ApiType.REPORT -> {
-                log.info { "reportScheduling: ${LocalDateTime.now()}" }
+                log.info { "reportScheduling: $now" }
             }
         }
     }
