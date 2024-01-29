@@ -30,7 +30,7 @@ wildberries:
     sales:
       startDate: '2023-01-01T00:00:00.0'
       cron:
-        enabled: false
+        enabled: true
         value: '0 15,45 * * * *'
     report:
       startDate: '2023-01-01T00:00:00.0'

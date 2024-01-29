@@ -51,7 +51,6 @@ class ApiRequestService(
         }
     }
 
-
     fun sales(startDateTime: LocalDateTime) {
         try {
             val fromTime = apiRequestResultService.getLastSuccessDateByApiType(ApiType.SALES)
