@@ -66,7 +66,7 @@ class OrderService(
         cellStyleDateTime.dataFormat = createHelper.createDataFormat().getFormat("dd.mm.yyyy hh:MM")
         cellStyleDate.dataFormat = createHelper.createDataFormat().getFormat("dd.mm.yyyy")
         for ((index, value) in ordersList.withIndex()) {
-            serOrderCells(workSheet, index, value, cellStyleDateTime, cellStyleDate)
+            setOrderCells(workSheet, index, value, cellStyleDateTime, cellStyleDate)
         }
     }
 
@@ -76,7 +76,7 @@ class OrderService(
         }
     }
 
-    private fun serOrderCells(
+    private fun setOrderCells(
         workSheet: HSSFSheet,
         index: Int,
         value: Order,
@@ -163,7 +163,7 @@ class OrderService(
         "Договор реализации",
         "Цена без скидок",
         "Скидка продавца",
-        "Скидка workbook",
+        "Скидка WB",
         "Фактическая цена с учетом всех скидок",
         "Цена со скидкой продавца",
         "Отмена заказа",

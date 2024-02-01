@@ -5,7 +5,7 @@
 <h1>API Статистики:</h1>
 <div id="orders">
     <form th:action="@{/}">
-        <table border="collapse">
+        <table>
             <tr>
                 <td>Дата:</td>
                 <td> от
@@ -23,7 +23,7 @@
                                name="конечная дата"
                                th:name="end"
                                type="datetime-local"
-                               value="2025-12-31T23:59">
+                               value="2024-12-31T23:59">
                     </label>
                 </td>
             </tr>
@@ -81,31 +81,31 @@
     </form>
 </div>
 
-<table>
-    <p th:text="MENU"/>
-    <!--    <p>Date Time:<label><input name="login" type="datetime-local" th:field="*{start}"></label></p>-->
-    <!--    -->
-    <!--    <label>Date Time: </label><input type="datetime-local" th:field="*{dateTime}"/>-->
+<!--<table>-->
+<!--    <p th:text="MENU"/>-->
+<!--    &lt;!&ndash;    <p>Date Time:<label><input name="login" type="datetime-local" th:field="*{start}"></label></p>&ndash;&gt;-->
+<!--    &lt;!&ndash;    &ndash;&gt;-->
+<!--    &lt;!&ndash;    <label>Date Time: </label><input type="datetime-local" th:field="*{dateTime}"/>&ndash;&gt;-->
 
-    <table>
-        <ul>
-            <tr>
-                <td><a th:href="@{/app/list}">Проверка базы</a></td>
-            </tr>
-            <tr>
-                <td><a th:href="@{/wildberries/statistics/incomes}">Поставки.</a></td>
-            </tr>
-            <tr>
-                <td><a th:href="@{/wildberries/statistics/stocks}">Склад.</a></td>
-            </tr>
-            <tr>
-                <td><a th:href="@{/wildberries/statistics/orders}">Заказы.</a></td>
-            </tr>
-            <tr>
-                <td><a th:href="@{/wildberries/statistics/sales}">Продажи.</a></td>
-            </tr>
-        </ul>
-    </table>
-</table>
+<!--&lt;!&ndash;    <table>&ndash;&gt;-->
+<!--&lt;!&ndash;        <ul>&ndash;&gt;-->
+<!--&lt;!&ndash;            <tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                <td><a th:href="@{/app/list}">Проверка базы</a></td>&ndash;&gt;-->
+<!--&lt;!&ndash;            </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;            <tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                <td><a th:href="@{/wildberries/statistics/incomes}">Поставки.</a></td>&ndash;&gt;-->
+<!--&lt;!&ndash;            </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;            <tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                <td><a th:href="@{/wildberries/statistics/stocks}">Склад.</a></td>&ndash;&gt;-->
+<!--&lt;!&ndash;            </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;            <tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                <td><a th:href="@{/wildberries/statistics/orders}">Заказы.</a></td>&ndash;&gt;-->
+<!--&lt;!&ndash;            </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;            <tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                <td><a th:href="@{/wildberries/statistics/sales}">Продажи.</a></td>&ndash;&gt;-->
+<!--&lt;!&ndash;            </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;        </ul>&ndash;&gt;-->
+<!--&lt;!&ndash;    </table>&ndash;&gt;-->
+<!--</table>-->
 </body>
 </html>

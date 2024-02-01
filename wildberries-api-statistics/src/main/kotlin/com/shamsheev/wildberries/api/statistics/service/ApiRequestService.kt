@@ -83,7 +83,7 @@ class ApiRequestService(
 
     fun stocks(startDateTime: LocalDateTime) {
         try {
-            val fromTime = apiRequestResultService.getLastSuccessDateByApiType(ApiType.SALES)
+            val fromTime = apiRequestResultService.getLastSuccessDateByApiType(ApiType.STOCKS)
             val stocksResult = wbStatistics.getStocks(fromTime.get().minusHours(timezone))
             stockService.save(stocksResult)
             apiRequestResultService.save(
@@ -113,7 +113,7 @@ class ApiRequestService(
 
     fun incomes(startDateTime: LocalDateTime) {
         try {
-            val fromTime = apiRequestResultService.getLastSuccessDateByApiType(ApiType.SALES)
+            val fromTime = apiRequestResultService.getLastSuccessDateByApiType(ApiType.INCOMES)
             val incomesResult = wbStatistics.getIncomes(fromTime.get().minusHours(timezone))
             incomeService.save(incomesResult)
             apiRequestResultService.save(

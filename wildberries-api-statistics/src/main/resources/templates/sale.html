@@ -7,34 +7,64 @@
 <div>
     Продажи и возвраты.
     <table border="collapse">
-        <ul>
-            <tr>
-                <td>
-                    <li><b>Дата и время продажи:</b></li>
-                </td>
-                <td><b>Уникальный идентификатор заказа:</b></td>
-                <td><b>Артикул WB:</b></td>
-                <td><b>Баркод:</b></td>
-                <td><b>Категория:</b></td>
-                <td><b>Предмет:</b></td>
-                <td><b>Бренд:</b></td>
-                <td><b>Размер товара:</b></td>
-                <td><b>Фактическая цена:</b></td>
-            </tr>
-            <tr th:each="sale : ${sales}">
-                <td>
-                    <li th:text="${sale.date}"></li>
-                </td>
-                <td th:text="${sale.srId}"></td>
-                <td th:text="${sale.product.wbId}"></td>
-                <td th:text="${sale.product.id}"></td>
-                <td th:text="${sale.product.category}"></td>
-                <td th:text="${sale.product.subject}"></td>
-                <td th:text="${sale.product.brand}"></td>
-                <td th:text="${sale.product.size}"></td>
-                <td th:text="${sale.finishPrice}"></td>
-            </tr>
-        </ul>
+        <tr>
+            <td><b>Дата и время продажи:</b></td>
+            <td><b>Дата и время обновления:</b></td>
+            <td><b>Склад отгрузки:</b></td>
+            <td><b>Страна:</b></td>
+            <td><b>Округ:</b></td>
+            <td><b>Регион:</b></td>
+            <td><b>Артикул продавца:</b></td>
+            <td><b>Артикул WB:</b></td>
+            <td><b>Баркод:</b></td>
+            <td><b>Категория:</b></td>
+            <td><b>Предмет:</b></td>
+            <td><b>Бренд:</b></td>
+            <td><b>Размер товара:</b></td>
+            <td><b>Номер поставки:</b></td>
+            <td><b>Договор поставки:</b></td>
+            <td><b>Договор реализации:</b></td>
+            <td><b>Цена без скидок:</b></td>
+            <td><b>Скидка продавца:</b></td>
+            <td><b>Скидка WB:</b></td>
+            <td><b>К перечислению продавцу:</b></td>
+            <td><b>Фактическая цена:</b></td>
+            <td><b>Цена со скидкой продавца:</b></td>
+            <td><b>идентификатор продажи/возврата:</b></td>
+            <td><b>Тип заказа:</b></td>
+            <td><b>Идентификатор стикера:</b></td>
+            <td><b>Номер заказа:</b></td>
+            <td><b>Уникальный идентификатор заказа:</b></td>
+        </tr>
+        <tr th:each="sale : ${sales}">
+            <td th:text="${#temporals.format(sale.date, 'dd-MM-yyyy HH:mm:ss')}"></td>
+            <td th:text="${#temporals.format(sale.lastChangeDate, 'dd-MM-yyyy HH:mm:ss')}"></td>
+            <td th:text="${sale.warehouseName}"></td>
+            <td th:text="${sale.countryName}"></td>
+            <td th:text="${sale.oblastName}"></td>
+            <td th:text="${sale.regionName}"></td>
+            <td th:text="${sale.product.supId}"></td>
+            <td th:text="${sale.product.wbId}"></td>
+            <td th:text="${sale.product.id}"></td>
+            <td th:text="${sale.product.category}"></td>
+            <td th:text="${sale.product.subject}"></td>
+            <td th:text="${sale.product.brand}"></td>
+            <td th:text="${sale.product.size}"></td>
+            <td th:text="${sale.incomeId}"></td>
+            <td th:text="${sale.isSupply}"></td>
+            <td th:text="${sale.isRealization}"></td>
+            <td th:text="${sale.totalPrice}"></td>
+            <td th:text="${sale.discountPercent}"></td>
+            <td th:text="${sale.salePrice}"></td>
+            <td th:text="${sale.forPay}"></td>
+            <td th:text="${sale.finishPrice}"></td>
+            <td th:text="${sale.priceWithDiscount}"></td>
+            <td th:text="${sale.saleId}"></td>
+            <td th:text="${sale.orderType}"></td>
+            <td th:text="${sale.sticker}"></td>
+            <td th:text="${sale.gNumber}"></td>
+            <td th:text="${sale.srId}"></td>
+        </tr>
     </table>
 </div>
 </body>

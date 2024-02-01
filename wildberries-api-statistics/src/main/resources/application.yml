@@ -21,32 +21,32 @@ wildberries:
   statistics:
     url: 'https://statistics-api.wildberries.ru/'
     auth:
-      token: 'eyJhbGciOiJFUzI1NiIsImtpZCI6IjIwMjMxMDI1djEiLCJ0eXAiOiJKV1QifQ.eyJlbnQiOjEsImV4cCI6MTcxNTc5NzA2MiwiaWQiOiI5MmE5MzVlNy0xZjIyLTRiNzctODM2ZC04ZGE2MGZkN2Q1NjciLCJpaWQiOjMxMzk0NzU4LCJvaWQiOjE2MzA5LCJzIjozMiwic2lkIjoiNDAwOWI1ZTYtZjk2OC01NTJkLTkzMGQtM2M0YTk5YzBkNjhjIiwidWlkIjozMTM5NDc1OH0.FTgUkhAQF7CvgTFBcSbVCyA6XuiL2ynqWB2gYN8cTLLSzGuQGPKXWbe1OOSmTsfxiBrX1zEGrZ00hUaxnd2WPA'
+      token: 'auth_token'
     orders:
-      startDate: '2023-01-01T00:00:00.0'
+      startDate: '2022-01-01T00:00:00.0'
       cron:
         enabled: true
         value: '0 0,30 * * * *'
     sales:
-      startDate: '2023-01-01T00:00:00.0'
+      startDate: '2022-01-01T00:00:00.0'
       cron:
         enabled: true
         value: '0 15,45 * * * *'
     report:
-      startDate: '2023-01-01T00:00:00.0'
+      startDate: '2022-01-01T00:00:00.0'
       cron:
         enabled: false
         value: '0 0 4 * * *'
     incomes:
-      startDate: '2024-01-01T00:00:00.0'
+      startDate: '2022-01-01T00:00:00.0'
       cron:
         enabled: true
         value: '0 7,37 * * * *'
     stocks:
-      startDate: '2020-01-01T00:00:00.0'
+      startDate: '2022-01-01T00:00:00.0'
       cron:
         enabled: true
-        value: '0 22,52,40 * * * *'
+        value: '0 22,52 * * * *'
 timezone: 4
 
 logging:

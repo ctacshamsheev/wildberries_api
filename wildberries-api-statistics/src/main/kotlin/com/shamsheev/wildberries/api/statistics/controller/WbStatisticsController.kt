@@ -54,23 +54,30 @@ class WbStatisticsController(
     }
 
     @GetMapping("/sales")
-    fun sales(@RequestBody dateTime: LocalDateTime?, int: Int?, model: Model): String {
-        val dateFrom = dateTime ?: LocalDateTime.now().minusDays(5)
-        val flag = int ?: 1
-        val results = wbStatistics.getSales(dateFrom, flag)
-        saleService.save(results)
+    fun sales(
+        @RequestParam(value = "start") start: String,
+        @RequestParam(value = "end") end: String,
+        model: Model,
+    ): String {
+        val results = saleService.findAllByDateBetween(LocalDateTime.parse(start), LocalDateTime.parse(end))
         model.addAttribute("sales", results)
         return "sale"
     }
 
-    @ExceptionHandler(Exception::class)
-    fun handleError(req: HttpServletRequest, ex: Exception): ModelAndView? {
-        log.error("Request: " + req.requestURL + " raised " + ex)
-        val modelAndView = ModelAndView()
-        modelAndView.addObject("exception", ex.message)
-        modelAndView.viewName = "error"
-        return modelAndView
+    @GetMapping("/sales/download", produces = ["text/csv"])
+    fun salesCsv(
+        @RequestParam(value = "start") start: String,
+        @RequestParam(value = "end") end: String,
+        model: Model,
+    ): ResponseEntity<FileSystemResource> {
+        val file: File = saleService.writeAllByDateBetween(LocalDateTime.parse(start), LocalDateTime.parse(end))
+        return ResponseEntity.ok()
+            .header("Content-Disposition", "attachment; filename=sales.xls")
+            .contentLength(file.length())
+            .contentType(MediaType.parseMediaType("text/csv"))
+            .body<FileSystemResource>(FileSystemResource(file))
     }
+
 
     @GetMapping("/incomes")
     fun incomes(@RequestBody dateTime: LocalDateTime?, model: Model): String {
@@ -90,6 +97,15 @@ class WbStatisticsController(
         stockService.save(results)
         model.addAttribute("stocks", results)
         return "stock"
+    }
+
+    @ExceptionHandler(Exception::class)
+    fun handleError(req: HttpServletRequest, ex: Exception): ModelAndView? {
+        log.error("Request: " + req.requestURL + " raised " + ex)
+        val modelAndView = ModelAndView()
+        modelAndView.addObject("exception", ex.message)
+        modelAndView.viewName = "error"
+        return modelAndView
     }
 
     companion object {
