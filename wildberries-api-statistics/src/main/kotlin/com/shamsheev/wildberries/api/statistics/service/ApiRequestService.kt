@@ -1,6 +1,5 @@
 package com.shamsheev.wildberries.api.statistics.service
 
-import com.shamsheev.wildberries.api.statistics.model.ApiRequestResult
 import com.shamsheev.wildberries.api.statistics.model.ApiStatus
 import com.shamsheev.wildberries.api.statistics.model.ApiType
 import com.shamsheev.wildberries.api.statistics.ports.WbStatistics
@@ -27,27 +26,10 @@ class ApiRequestService(
             val fromTime = apiRequestResultService.getLastSuccessDateByApiType(ApiType.ORDERS)
             val ordersResult = wbStatistics.getOrders(fromTime.get().minusHours(timezone), 0)
             orderService.save(ordersResult)
-            apiRequestResultService.save(
-                ApiRequestResult(
-                    startDateTime = startDateTime,
-                    endDateTime = LocalDateTime.now(),
-                    apiType = ApiType.ORDERS,
-                    apiStatus = ApiStatus.SUCCESS,
-                    count = ordersResult.size
-                )
-            )
+            apiRequestResultService.save(startDateTime, ApiType.ORDERS, ApiStatus.SUCCESS, ordersResult.size)
         } catch (e: Exception) {
             log.error { "${e.message}: $e" }
-            apiRequestResultService.save(
-                ApiRequestResult(
-                    startDateTime = startDateTime,
-                    endDateTime = LocalDateTime.now(),
-                    apiType = ApiType.ORDERS,
-                    apiStatus = ApiStatus.ERROR,
-                    errorMessage = e.message,
-                    count = 0
-                )
-            )
+            apiRequestResultService.save(startDateTime, ApiType.ORDERS, ApiStatus.ERROR, 0, e.message)
         }
     }
 
@@ -56,27 +38,10 @@ class ApiRequestService(
             val fromTime = apiRequestResultService.getLastSuccessDateByApiType(ApiType.SALES)
             val salesResult = wbStatistics.getSales(fromTime.get().minusHours(timezone), 0)
             saleService.save(salesResult)
-            apiRequestResultService.save(
-                ApiRequestResult(
-                    startDateTime = startDateTime,
-                    endDateTime = LocalDateTime.now(),
-                    apiType = ApiType.SALES,
-                    apiStatus = ApiStatus.SUCCESS,
-                    count = salesResult.size
-                )
-            )
+            apiRequestResultService.save(startDateTime, ApiType.SALES, ApiStatus.SUCCESS, salesResult.size)
         } catch (e: Exception) {
             log.error { "${e.message}: $e" }
-            apiRequestResultService.save(
-                ApiRequestResult(
-                    startDateTime = startDateTime,
-                    endDateTime = LocalDateTime.now(),
-                    apiType = ApiType.SALES,
-                    apiStatus = ApiStatus.ERROR,
-                    errorMessage = e.message,
-                    count = 0
-                )
-            )
+            apiRequestResultService.save(startDateTime, ApiType.SALES, ApiStatus.ERROR, 0, e.message)
         }
     }
 
@@ -86,27 +51,10 @@ class ApiRequestService(
             val fromTime = apiRequestResultService.getLastSuccessDateByApiType(ApiType.STOCKS)
             val stocksResult = wbStatistics.getStocks(fromTime.get().minusHours(timezone))
             stockService.save(stocksResult)
-            apiRequestResultService.save(
-                ApiRequestResult(
-                    startDateTime = startDateTime,
-                    endDateTime = LocalDateTime.now(),
-                    apiType = ApiType.STOCKS,
-                    apiStatus = ApiStatus.SUCCESS,
-                    count = stocksResult.size
-                )
-            )
+            apiRequestResultService.save(startDateTime, ApiType.STOCKS, ApiStatus.SUCCESS, stocksResult.size)
         } catch (e: Exception) {
             log.error { "${e.message}: $e" }
-            apiRequestResultService.save(
-                ApiRequestResult(
-                    startDateTime = startDateTime,
-                    endDateTime = LocalDateTime.now(),
-                    apiType = ApiType.STOCKS,
-                    apiStatus = ApiStatus.ERROR,
-                    errorMessage = e.message,
-                    count = 0
-                )
-            )
+            apiRequestResultService.save(startDateTime, ApiType.STOCKS, ApiStatus.ERROR, 0, e.message)
         }
     }
 
@@ -116,27 +64,10 @@ class ApiRequestService(
             val fromTime = apiRequestResultService.getLastSuccessDateByApiType(ApiType.INCOMES)
             val incomesResult = wbStatistics.getIncomes(fromTime.get().minusHours(timezone))
             incomeService.save(incomesResult)
-            apiRequestResultService.save(
-                ApiRequestResult(
-                    startDateTime = startDateTime,
-                    endDateTime = LocalDateTime.now(),
-                    apiType = ApiType.INCOMES,
-                    apiStatus = ApiStatus.SUCCESS,
-                    count = incomesResult.size
-                )
-            )
+            apiRequestResultService.save(startDateTime, ApiType.INCOMES, ApiStatus.SUCCESS, incomesResult.size)
         } catch (e: Exception) {
             log.error { "${e.message}: $e" }
-            apiRequestResultService.save(
-                ApiRequestResult(
-                    startDateTime = startDateTime,
-                    endDateTime = LocalDateTime.now(),
-                    apiType = ApiType.INCOMES,
-                    apiStatus = ApiStatus.ERROR,
-                    errorMessage = e.message,
-                    count = 0
-                )
-            )
+            apiRequestResultService.save(startDateTime, ApiType.STOCKS, ApiStatus.ERROR, 0, e.message)
         }
     }
 

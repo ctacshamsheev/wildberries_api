@@ -7,43 +7,49 @@
 </div>
 <div>
     Остатки товаров на складах WB.
+
     <table border="collapse">
-        <ul>
-            <tr>
-                <td>
-                    <li><b>Название склада:</b></li>
-                </td>
-                <td><b>Баркод:</b></td>
-                <td><b>Артикул WB:</b></td>
-                <td><b>Количество:</b></td>
-                <td><b>В пути к клиенту:</b></td>
-                <td><b>В пути от клиента:</b></td>
-                <td><b>Полное количество:</b></td>
-                <td><b>Категория:</b></td>
-                <td><b>Предмет:</b></td>
-                <td><b>Бренд:</b></td>
-                <td><b>Размер:</b></td>
-                <td><b>Цена:</b></td>
-                <td><b>Код контракта:</b></td>
-            </tr>
-            <tr th:each="stock : ${stocks}">
-                <td>
-                    <li th:text="${stock.warehouseName}"></li>
-                </td>
-                <td th:text="${stock.product.id}"></td>
-                <td th:text="${stock.product.wbId}"></td>
-                <td th:text="${stock.quantity}"></td>
-                <td th:text="${stock.inWayToClient}"></td>
-                <td th:text="${stock.inWayFromClient}"></td>
-                <td th:text="${stock.quantityFull}"></td>
-                <td th:text="${stock.product.category}"></td>
-                <td th:text="${stock.product.subject}"></td>
-                <td th:text="${stock.product.brand}"></td>
-                <td th:text="${stock.product.size}"></td>
-                <td th:text="${stock.price}"></td>
-                <td th:text="${stock.scCode}"></td>
-            </tr>
-        </ul>
+        <tr>
+            <td><b>Дата и время обновления:</b></td>
+            <td><b>Склад отгрузки:</b></td>
+            <td><b>Артикул продавца:</b></td>
+            <td><b>Артикул WB:</b></td>
+            <td><b>Баркод:</b></td>
+            <td><b>Количество, доступное для продажи:</b></td>
+            <td><b>В пути к клиенту:</b></td>
+            <td><b>В пути от клиента:</b></td>
+            <td><b>Полное (непроданное) количество:</b></td>
+            <td><b>Категория:</b></td>
+            <td><b>Предмет:</b></td>
+            <td><b>Бренд:</b></td>
+            <td><b>Размер товара:</b></td>
+            <td><b>Цена:</b></td>
+            <td><b>Скидка:</b></td>
+            <td><b>Договор поставки:</b></td>
+            <td><b>Договор реализации:</b></td>
+            <td><b>Код контракта:</b></td>
+
+        </tr>
+        <tr th:each="stock : ${stocks}">
+            <td th:text="${#temporals.format(stock.lastChangeDate, 'dd-MM-yyyy HH:mm:ss')}"></td>
+            <td th:text="${stock.warehouseName}"></td>
+            <td th:text="${stock.product.supId}"></td>
+            <td th:text="${stock.product.wbId}"></td>
+            <td th:text="${stock.product.id}"></td>
+            <td th:text="${stock.quantity}"></td>
+            <td th:text="${stock.inWayToClient}"></td>
+            <td th:text="${stock.inWayFromClient}"></td>
+            <td th:text="${stock.quantityFull}"></td>
+            <td th:text="${stock.product.category}"></td>
+            <td th:text="${stock.product.subject}"></td>
+            <td th:text="${stock.product.brand}"></td>
+            <td th:text="${stock.product.size}"></td>
+            <td th:text="${stock.price}"></td>
+            <td th:text="${stock.discount}"></td>
+            <td th:text="${stock.isSupply}"></td>
+            <td th:text="${stock.isRealization}"></td>
+            <td th:text="${stock.scCode}"></td>
+        </tr>
     </table>
 </div>
 </body>

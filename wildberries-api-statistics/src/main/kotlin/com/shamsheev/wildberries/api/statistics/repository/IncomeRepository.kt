@@ -10,4 +10,5 @@ import java.time.LocalDate
 interface IncomeRepository : CrudRepository<Income, Long> {
 
     fun existsByIncomeIdAndDateAndProduct(incomeId: Int?, date: LocalDate?, product: Product): Boolean
+    fun findAllByDateBetweenOrderByDate(date: LocalDate, date2: LocalDate): List<Income>
 }

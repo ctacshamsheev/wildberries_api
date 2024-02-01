@@ -11,7 +11,7 @@
                 <td> от
                     <label>
                         <input max="2025-12-31T23:59"
-                               min="2023-01-01T00:00"
+                               min="2020-01-01T00:00"
                                name="начальная дата"
                                th:name="start"
                                type="datetime-local"
@@ -19,7 +19,7 @@
                     </label> до
                     <label>
                         <input max="2025-12-31T23:59"
-                               min="2023-01-01T00:00"
+                               min="2020-01-01T00:00"
                                name="конечная дата"
                                th:name="end"
                                type="datetime-local"
@@ -48,28 +48,31 @@
                 <td><b>Поставки:</b></td>
                 <td> поставки, за указанный промежуток:</td>
                 <td>
-                    <!--                    <input th:formaction="@{/wildberries/statistics/sales}" type="submit" value="Отобразить"/>-->
-                    <!--                    <input th:formaction="@{/wildberries/statistics/sales/download}" type="submit" value="Скачать"/>-->
+                    <input th:formaction="@{/wildberries/statistics/incomes}" type="submit" value="Отобразить"/>
+                    <input th:formaction="@{/wildberries/statistics/incomes/download}" type="submit" value="Скачать"/>
                 </td>
             </tr>
             <tr>
                 <td><b>Склад:</b></td>
                 <td> остатки товаров на складах WB:</td>
                 <td>
-                    <!--                    <input th:formaction="@{/wildberries/statistics/sales}" type="submit" value="Отобразить"/>-->
-                    <!--                    <input th:formaction="@{/wildberries/statistics/sales/download}" type="submit" value="Скачать"/>-->
+                    <input th:formaction="@{/wildberries/statistics/stocks}" type="submit" value="Отобразить"/>
+                    <input th:formaction="@{/wildberries/statistics/stocks/download}" type="submit" value="Скачать"/>
                 </td>
             </tr>
             <tr>
                 <td><b>Отчет:</b></td>
                 <td>Отчет о продажах по реализации:</td>
                 <td>
-                    <!--                    <input th:formaction="@{/wildberries/statistics/sales}" type="submit" value="Отобразить"/>-->
-                    <!--                    <input th:formaction="@{/wildberries/statistics/sales/download}" type="submit" value="Скачать"/>-->
+                    <input th:formaction="@{/wildberries/statistics/report}" type="submit" value="Отобразить"/>
+                    <input th:formaction="@{/wildberries/statistics/report/download}" type="submit" value="Скачать"/>
                 </td>
             </tr>
-
-
+            <tr>
+                <td>
+                    <br>
+                </td>
+            </tr>
             <tr>
                 <td><b>История вызовов api:</b></td>
                 <td> лог обращений к api wildberries:</td>

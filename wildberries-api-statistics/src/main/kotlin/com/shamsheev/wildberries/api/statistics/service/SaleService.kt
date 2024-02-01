@@ -31,18 +31,12 @@ class SaleService(
         salesList.forEach(::save)
     }
 
-    fun findAllByDateBetween(start: LocalDateTime?, end: LocalDateTime?): List<Sale> {
-        val startTime: LocalDateTime = start ?: LocalDateTime.now().minusYears(3)
-        val endTime: LocalDateTime = end ?: LocalDateTime.now()
-        return saleRepository.findAllByDateBetweenOrderByDate(startTime, endTime)
-    }
+    fun findAllByDateBetween(start: LocalDateTime, end: LocalDateTime) =
+        saleRepository.findAllByDateBetweenOrderByDate(start, end)
 
-    fun writeAllByDateBetween(start: LocalDateTime?, end: LocalDateTime?): File {
-        val startTime: LocalDateTime = start ?: LocalDateTime.now().minusYears(3)
-        val endTime: LocalDateTime = end ?: LocalDateTime.now()
-        val salesList = saleRepository.findAllByDateBetweenOrderByDate(startTime, endTime)
-        return getFileCsv(salesList)
-    }
+    fun writeAllByDateBetween(start: LocalDateTime, end: LocalDateTime) =
+        getFileCsv(saleRepository.findAllByDateBetweenOrderByDate(start, end))
+
 
     private fun getFileCsv(salesList: List<Sale>): File {
         val workbook = HSSFWorkbook()

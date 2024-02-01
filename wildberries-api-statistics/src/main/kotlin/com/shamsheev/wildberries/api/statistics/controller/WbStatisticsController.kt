@@ -1,6 +1,5 @@
 package com.shamsheev.wildberries.api.statistics.controller
 
-import com.shamsheev.wildberries.api.statistics.ports.WbStatistics
 import com.shamsheev.wildberries.api.statistics.service.IncomeService
 import com.shamsheev.wildberries.api.statistics.service.OrderService
 import com.shamsheev.wildberries.api.statistics.service.SaleService
@@ -21,7 +20,7 @@ import javax.servlet.http.HttpServletRequest
 @Controller
 @RequestMapping("/wildberries/statistics")
 class WbStatisticsController(
-    val wbStatistics: WbStatistics,
+//    val wbStatistics: WbStatistics,
     val orderService: OrderService,
     val saleService: SaleService,
     val stockService: StockService,
@@ -50,7 +49,7 @@ class WbStatisticsController(
             .header("Content-Disposition", "attachment; filename=orders.xls")
             .contentLength(file.length())
             .contentType(MediaType.parseMediaType("text/csv"))
-            .body<FileSystemResource>(FileSystemResource(file))
+            .body(FileSystemResource(file))
     }
 
     @GetMapping("/sales")
@@ -75,28 +74,59 @@ class WbStatisticsController(
             .header("Content-Disposition", "attachment; filename=sales.xls")
             .contentLength(file.length())
             .contentType(MediaType.parseMediaType("text/csv"))
-            .body<FileSystemResource>(FileSystemResource(file))
+            .body(FileSystemResource(file))
     }
 
 
     @GetMapping("/incomes")
-    fun incomes(@RequestBody dateTime: LocalDateTime?, model: Model): String {
-        val dateFrom = dateTime ?: LocalDateTime.now().minusDays(30)
-        val results = wbStatistics.getIncomes(dateFrom)
-        incomeService.save(results)
+    fun incomes(
+        @RequestParam(value = "start") start: String,
+        @RequestParam(value = "end") end: String,
+        model: Model,
+    ): String {
+        val results = incomeService.findAllByDateBetween(LocalDateTime.parse(start), LocalDateTime.parse(end))
         model.addAttribute("incomes", results)
         return "income"
     }
 
+    @GetMapping("/incomes/download", produces = ["text/csv"])
+    fun incomesCsv(
+        @RequestParam(value = "start") start: String,
+        @RequestParam(value = "end") end: String,
+        model: Model,
+    ): ResponseEntity<FileSystemResource> {
+        val file: File = incomeService.writeAllByDateBetween(LocalDateTime.parse(start), LocalDateTime.parse(end))
+        return ResponseEntity.ok()
+            .header("Content-Disposition", "attachment; filename=incomes.xls")
+            .contentLength(file.length())
+            .contentType(MediaType.parseMediaType("text/csv"))
+            .body(FileSystemResource(file))
+    }
+
+
     @GetMapping("/stocks")
-    fun stocks(@RequestBody dateTime: LocalDateTime?, model: Model): String {
-//        val dateFrom = dateTime ?: LocalDateTime.now().minusYears(3)
-        // TODO !!
-        val dateFrom = dateTime ?: LocalDateTime.now().minusMonths(3)
-        val results = wbStatistics.getStocks(dateFrom)
-        stockService.save(results)
+    fun stocks(
+        @RequestParam(value = "start") start: String,
+        @RequestParam(value = "end") end: String,
+        model: Model,
+    ): String {
+        val results = stockService.findAllByDateBetween(LocalDateTime.parse(start), LocalDateTime.parse(end))
         model.addAttribute("stocks", results)
         return "stock"
+    }
+
+    @GetMapping("/stocks/download", produces = ["text/csv"])
+    fun stocksCsv(
+        @RequestParam(value = "start") start: String,
+        @RequestParam(value = "end") end: String,
+        model: Model,
+    ): ResponseEntity<FileSystemResource> {
+        val file: File = stockService.writeAllByDateBetween(LocalDateTime.parse(start), LocalDateTime.parse(end))
+        return ResponseEntity.ok()
+            .header("Content-Disposition", "attachment; filename=stocks.xls")
+            .contentLength(file.length())
+            .contentType(MediaType.parseMediaType("text/csv"))
+            .body(FileSystemResource(file))
     }
 
     @ExceptionHandler(Exception::class)

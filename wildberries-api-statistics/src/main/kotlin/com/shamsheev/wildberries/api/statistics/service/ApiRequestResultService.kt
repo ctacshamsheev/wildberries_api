@@ -1,6 +1,7 @@
 package com.shamsheev.wildberries.api.statistics.service
 
 import com.shamsheev.wildberries.api.statistics.model.ApiRequestResult
+import com.shamsheev.wildberries.api.statistics.model.ApiStatus
 import com.shamsheev.wildberries.api.statistics.model.ApiType
 import com.shamsheev.wildberries.api.statistics.repository.ApiRequestResultRepository
 import org.springframework.beans.factory.annotation.Autowired
@@ -23,11 +24,29 @@ class ApiRequestResultService(
             .maxByOrNull { it })
     }
 
-    fun isFirstStart(apiType: ApiType): Boolean {
-        return !apiRequestResultRepository.existsByApiType(apiType)
+    fun isFirstStart(apiType: ApiType) = !apiRequestResultRepository.existsByApiType(apiType)
+
+    fun findAllByDateBetween(start: LocalDateTime, and: LocalDateTime) =
+        apiRequestResultRepository.findAllByStartDateTimeBetweenOrderByEndDateTimeDesc(start, and)
+
+    fun save(
+        startDateTime: LocalDateTime,
+        apiType: ApiType,
+        apiStatus: ApiStatus,
+        count: Int,
+        errorMessage: String? = null,
+    ) {
+        save(
+            ApiRequestResult(
+                startDateTime = startDateTime,
+                endDateTime = LocalDateTime.now(),
+                apiType = apiType,
+                apiStatus = apiStatus,
+                errorMessage = errorMessage,
+                count = count
+
+            )
+        )
     }
 
-    fun findAllByDateBetween(start: LocalDateTime, and: LocalDateTime): List<ApiRequestResult> {
-        return apiRequestResultRepository.findAllByStartDateTimeBetweenOrderByEndDateTimeDesc(start, and)
-    }
 }
