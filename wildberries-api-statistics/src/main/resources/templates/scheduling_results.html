@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div>
+    <a th:href="@{/}">меню</a>
+</div>
+<div>
+    История вызовов api
+    <table border="collapse">
+        <ul>
+            <tr>
+                <td><b>Id:</b></td>
+                <td><b>Время вызова API:</b></td>
+                <td><b>Время завершения:</b></td>
+                <td><b>Тип апи:</b></td>
+                <td><b>Статус выполнения:</b></td>
+                <td><b>Описание ошибок:</b></td>
+                <td><b>Количество обновленных записей:</b></td>
+            </tr>
+            <tr th:each="result : ${results}">
+                <td th:text="${result.id}"></td>
+                <td th:text="${#temporals.format(result.startDateTime, 'dd-MM-yyyy HH:mm:ss')}"></td>
+                <td th:text="${#temporals.format(result.endDateTime, 'dd-MM-yyyy HH:mm:ss')}"></td>
+                <td th:text="${result.apiType}"></td>
+                <td th:text="${result.apiStatus}"></td>
+                <td th:text="${result.errorMessage}"></td>
+                <td th:text="${result.count}"></td>
+            </tr>
+        </ul>
+    </table>
+</div>
+</body>
+</html>

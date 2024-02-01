@@ -26,4 +26,8 @@ class ApiRequestResultService(
     fun isFirstStart(apiType: ApiType): Boolean {
         return !apiRequestResultRepository.existsByApiType(apiType)
     }
+
+    fun findAllByDateBetween(start: LocalDateTime, and: LocalDateTime): List<ApiRequestResult> {
+        return apiRequestResultRepository.findAllByStartDateTimeBetweenOrderByEndDateTimeDesc(start, and)
+    }
 }

@@ -26,9 +26,11 @@ class ApiRequestHandler(
             }
             ApiType.STOCKS -> {
                 log.info { "stocksScheduling: $now" }
+                apiRequestService.stocks(now)
             }
             ApiType.INCOMES -> {
                 log.info { "incomesScheduling: $now" }
+                apiRequestService.incomes(now)
             }
             ApiType.REPORT -> {
                 log.info { "reportScheduling: $now" }

@@ -80,6 +80,66 @@ class ApiRequestService(
         }
     }
 
+
+    fun stocks(startDateTime: LocalDateTime) {
+        try {
+            val fromTime = apiRequestResultService.getLastSuccessDateByApiType(ApiType.SALES)
+            val stocksResult = wbStatistics.getStocks(fromTime.get().minusHours(timezone))
+            stockService.save(stocksResult)
+            apiRequestResultService.save(
+                ApiRequestResult(
+                    startDateTime = startDateTime,
+                    endDateTime = LocalDateTime.now(),
+                    apiType = ApiType.STOCKS,
+                    apiStatus = ApiStatus.SUCCESS,
+                    count = stocksResult.size
+                )
+            )
+        } catch (e: Exception) {
+            log.error { "${e.message}: $e" }
+            apiRequestResultService.save(
+                ApiRequestResult(
+                    startDateTime = startDateTime,
+                    endDateTime = LocalDateTime.now(),
+                    apiType = ApiType.STOCKS,
+                    apiStatus = ApiStatus.ERROR,
+                    errorMessage = e.message,
+                    count = 0
+                )
+            )
+        }
+    }
+
+
+    fun incomes(startDateTime: LocalDateTime) {
+        try {
+            val fromTime = apiRequestResultService.getLastSuccessDateByApiType(ApiType.SALES)
+            val incomesResult = wbStatistics.getIncomes(fromTime.get().minusHours(timezone))
+            incomeService.save(incomesResult)
+            apiRequestResultService.save(
+                ApiRequestResult(
+                    startDateTime = startDateTime,
+                    endDateTime = LocalDateTime.now(),
+                    apiType = ApiType.INCOMES,
+                    apiStatus = ApiStatus.SUCCESS,
+                    count = incomesResult.size
+                )
+            )
+        } catch (e: Exception) {
+            log.error { "${e.message}: $e" }
+            apiRequestResultService.save(
+                ApiRequestResult(
+                    startDateTime = startDateTime,
+                    endDateTime = LocalDateTime.now(),
+                    apiType = ApiType.INCOMES,
+                    apiStatus = ApiStatus.ERROR,
+                    errorMessage = e.message,
+                    count = 0
+                )
+            )
+        }
+    }
+
     companion object {
         val log = KotlinLogging.logger {}
     }

@@ -41,8 +41,40 @@
                 <td> продажи, за указанный промежуток:</td>
                 <td>
                     <input th:formaction="@{/wildberries/statistics/sales}" type="submit" value="Отобразить"/>
-                    <input th:formaction="@{/wildberries/statistics/sales/download}" type="submit"
-                           value="Скачать"/>
+                    <input th:formaction="@{/wildberries/statistics/sales/download}" type="submit" value="Скачать"/>
+                </td>
+            </tr>
+            <tr>
+                <td><b>Поставки:</b></td>
+                <td> поставки, за указанный промежуток:</td>
+                <td>
+                    <!--                    <input th:formaction="@{/wildberries/statistics/sales}" type="submit" value="Отобразить"/>-->
+                    <!--                    <input th:formaction="@{/wildberries/statistics/sales/download}" type="submit" value="Скачать"/>-->
+                </td>
+            </tr>
+            <tr>
+                <td><b>Склад:</b></td>
+                <td> остатки товаров на складах WB:</td>
+                <td>
+                    <!--                    <input th:formaction="@{/wildberries/statistics/sales}" type="submit" value="Отобразить"/>-->
+                    <!--                    <input th:formaction="@{/wildberries/statistics/sales/download}" type="submit" value="Скачать"/>-->
+                </td>
+            </tr>
+            <tr>
+                <td><b>Отчет:</b></td>
+                <td>Отчет о продажах по реализации:</td>
+                <td>
+                    <!--                    <input th:formaction="@{/wildberries/statistics/sales}" type="submit" value="Отобразить"/>-->
+                    <!--                    <input th:formaction="@{/wildberries/statistics/sales/download}" type="submit" value="Скачать"/>-->
+                </td>
+            </tr>
+
+
+            <tr>
+                <td><b>История вызовов api:</b></td>
+                <td> лог обращений к api wildberries:</td>
+                <td>
+                    <input th:formaction="@{/scheduling/results}" type="submit" value="Отобразить"/>
                 </td>
             </tr>
         </table>
