@@ -1,10 +1,6 @@
 package com.shamsheev.wildberries.api.statistics.controller
 
-import com.shamsheev.wildberries.api.statistics.service.IncomeService
-import com.shamsheev.wildberries.api.statistics.service.OrderService
-import com.shamsheev.wildberries.api.statistics.service.SaleService
-import com.shamsheev.wildberries.api.statistics.service.StockService
-import mu.KotlinLogging
+import com.shamsheev.wildberries.api.statistics.service.*
 import org.springframework.core.io.FileSystemResource
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
@@ -18,11 +14,11 @@ import java.time.LocalDateTime
 @Controller
 @RequestMapping("/wildberries/statistics")
 class WbStatisticsController(
-//    val wbStatistics: WbStatistics,
     val orderService: OrderService,
     val saleService: SaleService,
     val stockService: StockService,
     val incomeService: IncomeService,
+    val apiRequestService: ApiRequestService,
 ) {
 
     @GetMapping("/orders")
@@ -49,6 +45,16 @@ class WbStatisticsController(
             .body(FileSystemResource(file))
     }
 
+    @GetMapping("/orders/scheduling")
+    fun ordersScheduling(
+        @RequestParam(value = "start") start: String,
+        model: Model,
+    ): String {
+        val results = apiRequestService.orders(LocalDateTime.now(), LocalDateTime.parse(start))
+        model.addAttribute("orders", results)
+        return "order"
+    }
+
     @GetMapping("/sales")
     fun sales(
         @RequestParam(value = "start") start: String,
@@ -64,7 +70,6 @@ class WbStatisticsController(
     fun salesCsv(
         @RequestParam(value = "start") start: String,
         @RequestParam(value = "end") end: String,
-        model: Model,
     ): ResponseEntity<FileSystemResource> {
         val file: File = saleService.writeAllByDateBetween(LocalDateTime.parse(start), LocalDateTime.parse(end))
         return ResponseEntity.ok()
@@ -74,6 +79,15 @@ class WbStatisticsController(
             .body(FileSystemResource(file))
     }
 
+    @GetMapping("/sales/scheduling")
+    fun salesScheduling(
+        @RequestParam(value = "start") start: String,
+        model: Model,
+    ): String {
+        val results = apiRequestService.sales(LocalDateTime.now(), LocalDateTime.parse(start))
+        model.addAttribute("sales", results)
+        return "sale"
+    }
 
     @GetMapping("/incomes")
     fun incomes(
@@ -90,7 +104,6 @@ class WbStatisticsController(
     fun incomesCsv(
         @RequestParam(value = "start") start: String,
         @RequestParam(value = "end") end: String,
-        model: Model,
     ): ResponseEntity<FileSystemResource> {
         val file: File = incomeService.writeAllByDateBetween(LocalDateTime.parse(start), LocalDateTime.parse(end))
         return ResponseEntity.ok()
@@ -100,6 +113,15 @@ class WbStatisticsController(
             .body(FileSystemResource(file))
     }
 
+    @GetMapping("/incomes/scheduling")
+    fun incomesScheduling(
+        @RequestParam(value = "start") start: String,
+        model: Model,
+    ): String {
+        val results = apiRequestService.incomes(LocalDateTime.now(), LocalDateTime.parse(start))
+        model.addAttribute("incomes", results)
+        return "income"
+    }
 
     @GetMapping("/stocks")
     fun stocks(
@@ -116,7 +138,6 @@ class WbStatisticsController(
     fun stocksCsv(
         @RequestParam(value = "start") start: String,
         @RequestParam(value = "end") end: String,
-        model: Model,
     ): ResponseEntity<FileSystemResource> {
         val file: File = stockService.writeAllByDateBetween(LocalDateTime.parse(start), LocalDateTime.parse(end))
         return ResponseEntity.ok()
@@ -125,16 +146,14 @@ class WbStatisticsController(
             .contentType(MediaType.parseMediaType("text/csv"))
             .body(FileSystemResource(file))
     }
-//
-//    @ExceptionHandler(Exception::class)
-//    fun handleError(req: HttpServletRequest, ex: Exception, model: Model): String {
-//        log.error("Request: " + req.requestURL + " raised " + ex.message + ", " + ex)
-//        model.addAttribute("message", ex.message)
-//        model.addAttribute("exception", ex.toString())
-//        return "error"
-//    }
 
-    companion object {
-        val log = KotlinLogging.logger {}
+    @GetMapping("/stocks/scheduling")
+    fun stocksScheduling(
+        @RequestParam(value = "start") start: String,
+        model: Model,
+    ): String {
+        val results = apiRequestService.stocks(LocalDateTime.now(), LocalDateTime.parse(start))
+        model.addAttribute("stocks", results)
+        return "stock"
     }
 }

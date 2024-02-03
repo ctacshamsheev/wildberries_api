@@ -3,6 +3,7 @@ package com.shamsheev.wildberries.api.statistics.service
 import com.shamsheev.wildberries.api.statistics.model.ApiType
 import com.shamsheev.wildberries.api.statistics.ports.event.ApiSchedulingEvent
 import mu.KotlinLogging
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.event.EventListener
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
@@ -10,32 +11,48 @@ import java.time.LocalDateTime
 @Service
 class ApiRequestHandler(
     val apiRequestService: ApiRequestService,
+    val apiRequestResultService: ApiRequestResultService,
 ) {
+
+    @Value("\${timezone:4}")
+    var timezone: Long = 4
 
     @EventListener(ApiSchedulingEvent::class)
     fun ordersScheduling(event: ApiSchedulingEvent) {
-        val now = LocalDateTime.now();
+        val now = LocalDateTime.now()
+        val start: LocalDateTime
         when (event.type) {
             ApiType.ORDERS -> {
-                log.info { "ordersScheduling: $now" }
-                apiRequestService.orders(now)
+                start = getStartDate(ApiType.ORDERS)
+                log.info { "ordersScheduling: $now, $start" }
+                apiRequestService.orders(now, start)
             }
             ApiType.SALES -> {
-                log.info { "salesScheduling: $now" }
-                apiRequestService.sales(now)
+                start = getStartDate(ApiType.SALES)
+                log.info { "salesScheduling: $now, $start" }
+                apiRequestService.sales(now, start)
             }
             ApiType.STOCKS -> {
-                log.info { "stocksScheduling: $now" }
-                apiRequestService.stocks(now)
+                start = getStartDate(ApiType.STOCKS)
+                log.info { "stocksScheduling: $now, $start" }
+                apiRequestService.stocks(now, start)
             }
             ApiType.INCOMES -> {
-                log.info { "incomesScheduling: $now" }
-                apiRequestService.incomes(now)
+                start = getStartDate(ApiType.INCOMES)
+                log.info { "incomesScheduling: $now, $start" }
+                apiRequestService.incomes(now, start)
             }
             ApiType.REPORT -> {
-                log.info { "reportScheduling: $now" }
+                start = getStartDate(ApiType.REPORT)
+                log.info { "reportScheduling: $now, $start" }
             }
         }
+    }
+
+    private fun getStartDate(apiType: ApiType): LocalDateTime {
+        return apiRequestResultService.getLastSuccessDateByApiType(apiType)
+            .orElse(LocalDateTime.MIN.plusHours(timezone))
+            .minusHours(timezone)
     }
 
     companion object {

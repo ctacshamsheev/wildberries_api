@@ -42,7 +42,7 @@ class StockService(
         val sheet = workbook.createSheet()
         val tempFile = File.createTempFile("file", ".xls")
         setRowsCells(workbook, salesList, sheet)
-        setAutosizeColumn(sheet)
+        setAutosizeColumn(sheet, getHeaders().size)
         setHeaderRow(sheet, workbook)
         workbook.write(tempFile.outputStream())
         workbook.close()
@@ -57,16 +57,19 @@ class StockService(
         val cellStyleDateTime: CellStyle = workbook.createCellStyle()
         val cellStyleDate: CellStyle = workbook.createCellStyle()
         val createHelper: CreationHelper = workbook.creationHelper
-        cellStyleDateTime.dataFormat = createHelper.createDataFormat().getFormat("dd.mm.yyyy hh:MM")
         cellStyleDate.dataFormat = createHelper.createDataFormat().getFormat("dd.mm.yyyy")
+        cellStyleDateTime.dataFormat = createHelper.createDataFormat().getFormat("dd.mm.yyyy hh:MM")
         for ((index, value) in ordersList.withIndex()) {
             setStockCells(workSheet, index, value, cellStyleDateTime, cellStyleDate)
         }
     }
 
-    private fun setAutosizeColumn(workSheet: HSSFSheet) {
-        for (j in 0..26) {
-            workSheet.autoSizeColumn(j)
+    private fun setAutosizeColumn(workSheet: HSSFSheet, size: Int) {
+        try {
+            for (j in 0..size) {
+                workSheet.autoSizeColumn(j)
+            }
+        } catch (e: Throwable) {
         }
     }
 

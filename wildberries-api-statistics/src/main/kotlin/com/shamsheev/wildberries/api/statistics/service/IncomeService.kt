@@ -49,7 +49,7 @@ class IncomeService(
         val sheet = workbook.createSheet()
         val tempFile = File.createTempFile("file", ".xls")
         setRowsCells(workbook, ordersList, sheet)
-        setAutosizeColumn(sheet)
+        setAutosizeColumn(sheet, getHeaders().size)
         setHeaderRow(sheet, workbook)
         workbook.write(tempFile.outputStream())
         workbook.close()
@@ -71,9 +71,12 @@ class IncomeService(
         }
     }
 
-    private fun setAutosizeColumn(workSheet: HSSFSheet) {
-        for (j in 0..26) {
-            workSheet.autoSizeColumn(j)
+    private fun setAutosizeColumn(workSheet: HSSFSheet, size: Int) {
+        try {
+            for (j in 0..size) {
+                workSheet.autoSizeColumn(j)
+            }
+        } catch (e: Throwable) {
         }
     }
 

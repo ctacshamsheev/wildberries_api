@@ -83,33 +83,64 @@
         </table>
     </form>
 </div>
-
-<!--<table>-->
-<!--    <p th:text="MENU"/>-->
-<!--    &lt;!&ndash;    <p>Date Time:<label><input name="login" type="datetime-local" th:field="*{start}"></label></p>&ndash;&gt;-->
-<!--    &lt;!&ndash;    &ndash;&gt;-->
-<!--    &lt;!&ndash;    <label>Date Time: </label><input type="datetime-local" th:field="*{dateTime}"/>&ndash;&gt;-->
-
-<!--&lt;!&ndash;    <table>&ndash;&gt;-->
-<!--&lt;!&ndash;        <ul>&ndash;&gt;-->
-<!--&lt;!&ndash;            <tr>&ndash;&gt;-->
-<!--&lt;!&ndash;                <td><a th:href="@{/app/list}">Проверка базы</a></td>&ndash;&gt;-->
-<!--&lt;!&ndash;            </tr>&ndash;&gt;-->
-<!--&lt;!&ndash;            <tr>&ndash;&gt;-->
-<!--&lt;!&ndash;                <td><a th:href="@{/wildberries/statistics/incomes}">Поставки.</a></td>&ndash;&gt;-->
-<!--&lt;!&ndash;            </tr>&ndash;&gt;-->
-<!--&lt;!&ndash;            <tr>&ndash;&gt;-->
-<!--&lt;!&ndash;                <td><a th:href="@{/wildberries/statistics/stocks}">Склад.</a></td>&ndash;&gt;-->
-<!--&lt;!&ndash;            </tr>&ndash;&gt;-->
-<!--&lt;!&ndash;            <tr>&ndash;&gt;-->
-<!--&lt;!&ndash;                <td><a th:href="@{/wildberries/statistics/orders}">Заказы.</a></td>&ndash;&gt;-->
-<!--&lt;!&ndash;            </tr>&ndash;&gt;-->
-<!--&lt;!&ndash;            <tr>&ndash;&gt;-->
-<!--&lt;!&ndash;                <td><a th:href="@{/wildberries/statistics/sales}">Продажи.</a></td>&ndash;&gt;-->
-<!--&lt;!&ndash;            </tr>&ndash;&gt;-->
-<!--&lt;!&ndash;        </ul>&ndash;&gt;-->
-<!--&lt;!&ndash;    </table>&ndash;&gt;-->
-<!--</table>-->
-
+<br>
+<br>
+<br>
+<br>
+<br>
+<div>
+    <form th:action="@{/}">
+        Ручной вызов шедулера:
+        <table>
+            <tr>
+                <td>дата:</td>
+                <td> от
+                    <label>
+                        <input max="2025-12-31T23:59"
+                               min="2020-01-01T00:00"
+                               name="начальная дата"
+                               th:name="start"
+                               type="datetime-local"
+                               value="2024-01-01T00:00">
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td><b>Заказы:</b></td>
+                <td>
+                    <input th:formaction="@{/wildberries/statistics/orders/scheduling}" type="submit"
+                           value="Запустить"/>
+                </td>
+            </tr>
+            <tr>
+                <td><b>Продажи:</b></td>
+                <td>
+                    <input th:formaction="@{/wildberries/statistics/sales/scheduling}" type="submit" value="Запустить"/>
+                </td>
+            </tr>
+            <tr>
+                <td><b>Поставки:</b></td>
+                <td>
+                    <input th:formaction="@{/wildberries/statistics/incomes/scheduling}" type="submit"
+                           value="Запустить"/>
+                </td>
+            </tr>
+            <tr>
+                <td><b>Склад:</b></td>
+                <td>
+                    <input th:formaction="@{/wildberries/statistics/stocks/scheduling}" type="submit"
+                           value="Запустить"/>
+                </td>
+            </tr>
+            <tr>
+                <td><b>Отчет:</b></td>
+                <td>
+                    <input th:formaction="@{/wildberries/statistics/report/scheduling}" type="submit"
+                           value="Запустить"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
 </body>
 </html>
