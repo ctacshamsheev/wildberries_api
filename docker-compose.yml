@@ -2,41 +2,22 @@ version: '3.9'
 
 services:
   appserver:
-#    build:
+    container_name: wildberries-api-statistics
+    #    build:
     #      context: ./wildberries-api-statistics/
     #      dockerfile: ./Dockerfile
-    container_name: wildberries_api-appserver
-    image: ctacshamsheev/wildberries_api-appserver:v1.0
+    image: ctacshamsheev/wildberries-api-statistics:v1.0
     restart: always
     ports:
       - '80:8080'
     depends_on:
       - postgres
-    #      - rabbitmq
     environment:
-      #      TZ: Europe/Moscow
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/wildberries_api_v1
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: postgres
-
-  #      SPRING_RABBITMQ_HOST: rabbitmq
-  #      SPRING_RABBITMQ_USERNAME: admin
-  #      SPRING_RABBITMQ_PASSWORD: admin
-  #    volumes:
-  #      - ./logs/WbPriceTrackerApi:/api/logs
-
-  #
-  #  rabbitmq:
-  #    container_name: rabbitmq
-  #    image: rabbitmq:3.10.7-management-alpine
-  #    restart: always
-  #    ports:
-  #      - '5672:5672'
-  #      - '15672:15672'
-  #    environment:
-  #      RABBITMQ_DEFAULT_USER: admin
-  #      RABBITMQ_DEFAULT_PASS: admin
-  #      RABBITMQ_DEFAULT_VHOST: /
+      WILDBERRIES_STATISTICS_AUTH_TOKEN: 'auth_token'
+      LOGGING_LEVEL_COM_SHAMSHEEV: INFO
 
   postgres:
     container_name: postgres
@@ -49,7 +30,7 @@ services:
     ports:
       - '5432:5432'
     volumes:
-      - postgres-data:/var/lib/postgresql/wildberries_api_data_v1
+      - postgres-data:/var/lib/postgresql/data
 
   pgadmin:
     container_name: pgadmin
@@ -71,4 +52,4 @@ services:
       - ./servers.json:/pgadmin4/servers.json
 
 volumes:
-  postgres-data:
+  postgres-data: { }
