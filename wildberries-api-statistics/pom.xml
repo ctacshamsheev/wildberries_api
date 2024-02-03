@@ -18,7 +18,7 @@
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-
+        <kotlinJvmTarget>1.8</kotlinJvmTarget>
         <java.version>1.8</java.version>
         <kotlin.version>1.8.10</kotlin.version>
         <junit.jupiter.version>5.7.2</junit.jupiter.version>
@@ -32,13 +32,9 @@
         <jodatime-version>2.7</jodatime-version>
         <maven-plugin-version>1.0.0</maven-plugin-version>
         <junit-version>4.13.2</junit-version>
-        <kotlinJvmTarget>1.8</kotlinJvmTarget>
         <moshi-kotlin.version>1.12.0</moshi-kotlin.version>
         <migbase64.version>2.2</migbase64.version>
         <apache.poi.version>4.1.2</apache.poi.version>
-
-        <!--        <spring-cloud.version>2022.0.4</spring-cloud.version>-->
-        <!--        <feign.version>11.7</feign.version>-->
     </properties>
 
     <dependencies>
@@ -55,37 +51,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
-        <!--        <dependency>-->
-        <!--            <groupId>org.springframework.cloud</groupId>-->
-        <!--            <artifactId>spring-cloud-starter-openfeign</artifactId>-->
-        <!--        </dependency>-->
-        <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-openfeign -->
-        <!--        <dependency>-->
-        <!--            <groupId>org.springframework.cloud</groupId>-->
-        <!--            <artifactId>spring-cloud-starter-openfeign</artifactId>-->
-        <!--            <version>4.1.0</version>-->
-        <!--        </dependency>-->
-
-        <!--        <dependency>-->
-        <!--            <groupId>org.springframework.cloud</groupId>-->
-        <!--            <artifactId>spring-cloud-starter-oauth2</artifactId>-->
-        <!--            <version>2.2.2.RELEASE</version>-->
-        <!--        </dependency>-->
-        <!--        <dependency>-->
-        <!--            <groupId>io.github.openfeign</groupId>-->
-        <!--            <artifactId>feign-hystrix</artifactId>-->
-        <!--            <version>${feign.version}</version>-->
-        <!--        </dependency>-->
-        <!--        <dependency>-->
-        <!--            <groupId>io.github.openfeign</groupId>-->
-        <!--            <artifactId>feign-jackson</artifactId>-->
-        <!--            <version>${feign.version}</version>-->
-        <!--        </dependency>-->
-
-        <!--        <dependency>-->
-        <!--            <groupId>org.springframework.boot</groupId>-->
-        <!--            <artifactId>spring-boot-starter-security</artifactId>-->
-        <!--        </dependency>-->
 
         <!--database-->
         <dependency>
@@ -188,31 +153,6 @@
             <artifactId>logback-core</artifactId>
             <version>1.2.3</version>
         </dependency>
-        <!--        <dependency>-->
-        <!--            <groupId>ch.qos.logback</groupId>-->
-        <!--            <artifactId>logback-classic</artifactId>-->
-        <!--            <version>1.2.3</version>-->
-        <!--        </dependency>-->
-        <!--        <dependency>-->
-        <!--            <groupId>ch.qos.logback</groupId>-->
-        <!--            <artifactId>logback-core</artifactId>-->
-        <!--            <version>1.2.3</version>-->
-        <!--        </dependency>-->
-
-        <!--        openapi--><!-- dependencies are needed for the client being generated -->
-
-        <!--        <dependency>-->
-        <!--            <groupId>io.swagger</groupId>-->
-        <!--            <artifactId>swagger-annotations</artifactId>-->
-        <!--            <version>${swagger-annotations-version}</version>-->
-        <!--        </dependency>-->
-
-
-        <!--        <dependency>-->
-        <!--            <groupId>org.openapitools</groupId>-->
-        <!--            <artifactId>openapi-generator-cli</artifactId>-->
-        <!--            <version>7.2.0</version>-->
-        <!--        </dependency>-->
 
         <!-- You can find the dependencies for the library configuration you chose by looking in JavaClientCodegen.
              Then find the corresponding dependency on Maven Central, and set the versions in the property section below -->
@@ -307,24 +247,6 @@
             <version>4.2.2</version>
         </dependency>
 
-        <!--        <dependency>-->
-        <!--            <groupId>org.springframework.boot</groupId>-->
-        <!--            <artifactId>spring-boot-autoconfigure</artifactId>-->
-        <!--            <version>3.2.1</version>-->
-        <!--        </dependency>-->
-        <!--        <dependency>-->
-        <!--            <groupId>org.springframework</groupId>-->
-        <!--            <artifactId>spring-test</artifactId>-->
-        <!--            <version>6.1.1</version>-->
-        <!--        </dependency>-->
-
-        <!--        &lt;!&ndash; kotlin-stdlib for lowercase, uppercase, etc &ndash;&gt;-->
-        <!--        <dependency>-->
-        <!--            <groupId>org.jetbrains.kotlin</groupId>-->
-        <!--            <artifactId>kotlin-stdlib</artifactId>-->
-        <!--            <version>${kotlin.version}</version>-->
-        <!--        </dependency>-->
-
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi</artifactId>
@@ -338,17 +260,6 @@
         </dependency>
 
     </dependencies>
-    <!--    <dependencyManagement>-->
-    <!--        <dependencies>-->
-    <!--            <dependency>-->
-    <!--                <groupId>org.springframework.cloud</groupId>-->
-    <!--                <artifactId>spring-cloud-dependencies</artifactId>-->
-    <!--                <version>${spring-cloud.version}</version>-->
-    <!--                <type>pom</type>-->
-    <!--                <scope>import</scope>-->
-    <!--            </dependency>-->
-    <!--        </dependencies>-->
-    <!--    </dependencyManagement>-->
 
     <build>
         <sourceDirectory>${project.basedir}/src/main/kotlin</sourceDirectory>
@@ -369,81 +280,25 @@
                         </goals>
                         <configuration>
                             <!-- specify the swagger yaml -->
-                            <!--                            <inputSpec>${project.basedir}/swagger.yaml</inputSpec>-->
-                            <inputSpec>https://openapi.wildberries.ru/statistics/swagger/api/ru/swagger.yaml</inputSpec>
+                            <inputSpec>${project.basedir}/swagger.yaml</inputSpec>
+                            <!--                            <inputSpec>https://openapi.wildberries.ru/statistics/swagger/api/ru/swagger.yaml</inputSpec>-->
                             <cleanupOutput>true</cleanupOutput>
                             <!-- target to generate kotlin client code -->
                             <generatorName>kotlin</generatorName>
-
-                            <!-- hint: if you want to generate kotlin server code, e.g. based on Spring Boot,
-                                 you can use the following generator: <generatorName>kotlin-spring</generatorName> -->
-                            <!--                            <library>spring-boot</library>-->
-                            <!--                            <library>jvm-spring-webclient</library>-->
-                            <!--                            todo-->
-                            <!--                            <generateApiTests>true</generateApiTests>-->
-                            <!--                            <generateModelTests>true</generateModelTests>-->
-                            <!--                            <generateSupportingFiles>true</generateSupportingFiles>-->
-                            <!--                            <output>${project.build.directory}/generated-sources/openapi/src/main/kotlin/statistica</output>-->
-                            <!--                            <apiPackage>openapi.wildberries.ru.statistics.api</apiPackage>-->
-                            <!--                            <modelPackage>openapi.wildberries.ru.statistics.model</modelPackage>-->
                             <packageName>openapi.wildberries.ru.statistics</packageName>
 
                             <!-- pass any necessary config options -->
                             <configOptions>
                                 <java8>true</java8>-->
                                 <serializableModel>true</serializableModel>
-                                <!--                            todo-->
                                 <serializationLibrary>jackson</serializationLibrary>
-                                <!--                                <dateLibrary>custom</dateLibrary>-->
                                 <dateLibrary>java8-localdatetime</dateLibrary>
-                                <!--                            todo-->
-                                <!--                                <dateLibrary>legacy</dateLibrary>-->
-                                <!--                                <defaultInterfaces>false</defaultInterfaces>-->
                             </configOptions>
-                            <!--                            <typeMappings>-->
-                            <!--                                <typeMapping>date=LocalDate</typeMapping>-->
-                            <!--                                <typeMapping>date-time=LocalDateTime</typeMapping>-->
-                            <!--                                <typeMapping>OffsetDateTime=LocalDateTime</typeMapping>-->
-                            <!--                            </typeMappings>-->
-                            <!--                            <importMappings>-->
-                            <!--                                <importMapping>LocalDate=java.time.LocalDate</importMapping>-->
-                            <!--                                <importMapping>LocalDateTime=java.time.LocalDateTime</importMapping>-->
-                            <!--                                <importMapping>java.time.OffsetDateTime=java.time.LocalDateTime</importMapping>-->
-                            <!--                            </importMappings>-->
                             <additionalProperties>
                                 <additionalProperty>apiClientPrefix=WbStatistikaClient</additionalProperty>
                             </additionalProperties>
                         </configuration>
                     </execution>
-                    <!--                    <execution>-->
-                    <!--                        <id>kotlin</id>-->
-                    <!--                        <phase>generate-sources</phase>-->
-                    <!--                        <goals>-->
-                    <!--                            <goal>generate</goal>-->
-                    <!--                        </goals>-->
-                    <!--                        <configuration>-->
-                    <!--                            &lt;!&ndash; specify the swagger yaml &ndash;&gt;-->
-                    <!--                            <inputSpec>-->
-                    <!--                                https://raw.githubusercontent.com/OpenAPITools/openapi-generator/master/modules/openapi-generator/src/test/resources/2_0/petstore.yaml-->
-                    <!--                            </inputSpec>-->
-
-                    <!--                            &lt;!&ndash; target to generate java client code &ndash;&gt;-->
-                    <!--                            <generatorName>kotlin</generatorName>-->
-
-                    <!--                            &lt;!&ndash; hint: if you want to generate java server code, e.g. based on Spring Boot,-->
-                    <!--                                 you can use the following target: <generatorName>spring</generatorName> &ndash;&gt;-->
-
-                    <!--                            &lt;!&ndash; pass any necessary config options &ndash;&gt;-->
-                    <!--                            <configOptions>-->
-                    <!--                                <serializableModel>true</serializableModel>-->
-                    <!--                            </configOptions>-->
-
-                    <!--                            <output>${project.build.directory}/generated-sources/kotlin</output>-->
-                    <!--                            <apiPackage>kotlintest.org.openapitools.client.api</apiPackage>-->
-                    <!--                            <modelPackage>kotlintest.org.openapitools.client.model</modelPackage>-->
-                    <!--                            <invokerPackage>kotlintest.org.openapitools.client</invokerPackage>-->
-                    <!--                        </configuration>-->
-                    <!--                    </execution>-->
                 </executions>
             </plugin>
 
