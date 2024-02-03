@@ -2,11 +2,11 @@ version: '3.9'
 
 services:
   appserver:
-    build:
-      context: ./wildberries-api-statistics/
-      dockerfile: ./Dockerfile
-    container_name: wb
-    #    image: steshabolk/wb-price-tracker-api
+#    build:
+    #      context: ./wildberries-api-statistics/
+    #      dockerfile: ./Dockerfile
+    container_name: wildberries_api-appserver
+    image: ctacshamsheev/wildberries_api-appserver:v1.0
     restart: always
     ports:
       - '80:8080'

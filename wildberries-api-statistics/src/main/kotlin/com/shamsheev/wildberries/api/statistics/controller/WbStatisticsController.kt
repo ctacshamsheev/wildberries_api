@@ -11,10 +11,8 @@ import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.*
-import org.springframework.web.servlet.ModelAndView
 import java.io.File
 import java.time.LocalDateTime
-import javax.servlet.http.HttpServletRequest
 
 
 @Controller
@@ -42,7 +40,6 @@ class WbStatisticsController(
     fun ordersCsv(
         @RequestParam(value = "start") start: String,
         @RequestParam(value = "end") end: String,
-        model: Model,
     ): ResponseEntity<FileSystemResource> {
         val file: File = orderService.writeAllByDateBetween(LocalDateTime.parse(start), LocalDateTime.parse(end))
         return ResponseEntity.ok()
@@ -128,15 +125,14 @@ class WbStatisticsController(
             .contentType(MediaType.parseMediaType("text/csv"))
             .body(FileSystemResource(file))
     }
-
-    @ExceptionHandler(Exception::class)
-    fun handleError(req: HttpServletRequest, ex: Exception): ModelAndView? {
-        log.error("Request: " + req.requestURL + " raised " + ex)
-        val modelAndView = ModelAndView()
-        modelAndView.addObject("exception", ex.message)
-        modelAndView.viewName = "error"
-        return modelAndView
-    }
+//
+//    @ExceptionHandler(Exception::class)
+//    fun handleError(req: HttpServletRequest, ex: Exception, model: Model): String {
+//        log.error("Request: " + req.requestURL + " raised " + ex.message + ", " + ex)
+//        model.addAttribute("message", ex.message)
+//        model.addAttribute("exception", ex.toString())
+//        return "error"
+//    }
 
     companion object {
         val log = KotlinLogging.logger {}
