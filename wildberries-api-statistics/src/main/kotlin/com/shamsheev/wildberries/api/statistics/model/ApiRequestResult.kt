@@ -11,10 +11,13 @@ data class ApiRequestResult(
     var id: Long? = null,
 
     @Column(name = "start_date_time")
-    val startDateTime: LocalDateTime,
+    val start: LocalDateTime,
 
     @Column(name = "end_date_time")
-    val endDateTime: LocalDateTime,
+    val end: LocalDateTime,
+
+    @Column(name = "from_date_time")
+    val from: LocalDateTime,
 
     @Column(name = "api_type")
     @Enumerated(EnumType.STRING)

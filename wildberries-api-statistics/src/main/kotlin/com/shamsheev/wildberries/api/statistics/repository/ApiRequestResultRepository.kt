@@ -14,7 +14,7 @@ interface ApiRequestResultRepository : CrudRepository<ApiRequestResult, Long> {
 
     fun existsByApiType(apiType: ApiType): Boolean
 
-    fun findAllByStartDateTimeBetweenOrderByEndDateTimeDesc(
+    fun findAllByStartBetweenOrderByEndDesc(
         start: LocalDateTime,
         and: LocalDateTime,
     ): List<ApiRequestResult>

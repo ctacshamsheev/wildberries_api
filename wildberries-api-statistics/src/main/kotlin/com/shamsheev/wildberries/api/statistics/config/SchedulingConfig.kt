@@ -50,12 +50,13 @@ class SchedulingConfig(
             val startTime = LocalDateTime.parse(startStr)
             apiRequestResultService.save(
                 ApiRequestResult(
-                    startDateTime = startTime,
-                    endDateTime = startTime,
+                    start = startTime,
+                    end = LocalDateTime.now(),
                     apiType = apiType,
                     apiStatus = ApiStatus.SUCCESS,
                     errorMessage = "first init",
-                    count = 0
+                    count = 0,
+                    from = startTime
                 )
             )
         }

@@ -20,31 +20,32 @@ class ApiRequestResultService(
 
     fun getLastSuccessDateByApiType(apiType: ApiType): Optional<LocalDateTime> {
         return Optional.ofNullable(apiRequestResultRepository.findAllByApiTypeAndApiStatus(apiType)
-            .map { it.startDateTime }
+            .map { it.start }
             .maxByOrNull { it })
     }
 
     fun isFirstStart(apiType: ApiType) = !apiRequestResultRepository.existsByApiType(apiType)
 
     fun findAllByDateBetween(start: LocalDateTime, and: LocalDateTime) =
-        apiRequestResultRepository.findAllByStartDateTimeBetweenOrderByEndDateTimeDesc(start, and)
+        apiRequestResultRepository.findAllByStartBetweenOrderByEndDesc(start, and)
 
     fun save(
         startDateTime: LocalDateTime,
         apiType: ApiType,
         apiStatus: ApiStatus,
         count: Int,
+        fromDateTime: LocalDateTime,
         errorMessage: String? = null,
     ) {
         save(
             ApiRequestResult(
-                startDateTime = startDateTime,
-                endDateTime = LocalDateTime.now(),
+                start = startDateTime,
+                end = LocalDateTime.now(),
                 apiType = apiType,
                 apiStatus = apiStatus,
-                errorMessage = errorMessage,
-                count = count
-
+                errorMessage = errorMessage?.substring(255),
+                count = count,
+                from = fromDateTime
             )
         )
     }

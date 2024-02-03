@@ -169,8 +169,8 @@ components:
         status:
           type: string
           maxLength: 50
-          enum:
-            - Принято
+          #          enum:
+          #            - Принято
           description: Текущий статус поставки
     StocksItem:
       type: object

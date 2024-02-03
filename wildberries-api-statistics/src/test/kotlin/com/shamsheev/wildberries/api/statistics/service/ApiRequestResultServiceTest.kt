@@ -39,20 +39,22 @@ internal class ApiRequestResultServiceTest {
         val time = LocalDateTime.now()
         apiRequestResultService.save(
             ApiRequestResult(
-                startDateTime = time.plusDays(2),
-                endDateTime = time.plusDays(3),
+                start = time.plusDays(2),
+                end = time.plusDays(3),
                 apiType = ApiType.ORDERS,
                 apiStatus = ApiStatus.SUCCESS,
-                count = 0
+                count = 0,
+                from = LocalDateTime.now()
             )
         )
         apiRequestResultService.save(
             ApiRequestResult(
-                startDateTime = time.minusDays(2),
-                endDateTime = time.minusDays(2),
+                start = time.minusDays(2),
+                end = time.minusDays(2),
                 apiType = ApiType.ORDERS,
                 apiStatus = ApiStatus.SUCCESS,
-                count = 0
+                count = 0,
+                from = LocalDateTime.now()
             )
         )
         val isEmptyOrders = apiRequestResultService.isFirstStart(ApiType.ORDERS)
@@ -72,39 +74,43 @@ internal class ApiRequestResultServiceTest {
         val time = LocalDateTime.now()
         apiRequestResultService.save(
             ApiRequestResult(
-                startDateTime = time.minusDays(1),
-                endDateTime = time.minusDays(2),
+                start = time.minusDays(1),
+                end = time.minusDays(2),
                 apiType = ApiType.ORDERS,
                 apiStatus = ApiStatus.SUCCESS,
-                count = 0
+                count = 0,
+                from = LocalDateTime.now()
             )
         )
         apiRequestResultService.save(
             ApiRequestResult(
-                startDateTime = time,
-                endDateTime = time.plusDays(1),
+                start = time,
+                end = time.plusDays(1),
                 apiType = ApiType.ORDERS,
                 apiStatus = ApiStatus.SUCCESS,
-                count = 0
+                count = 0,
+                from = LocalDateTime.now()
             )
         )
         apiRequestResultService.save(
             ApiRequestResult(
-                startDateTime = time.plusDays(1),
-                endDateTime = time.plusDays(2),
+                start = time.plusDays(1),
+                end = time.plusDays(2),
                 apiType = ApiType.SALES,
                 apiStatus = ApiStatus.SUCCESS,
-                count = 0
+                count = 0,
+                from = LocalDateTime.now()
             )
         )
 
         apiRequestResultService.save(
             ApiRequestResult(
-                startDateTime = time.plusDays(2),
-                endDateTime = time.plusDays(3),
+                start = time.plusDays(2),
+                end = time.plusDays(3),
                 apiType = ApiType.ORDERS,
                 apiStatus = ApiStatus.ERROR,
-                count = 0
+                count = 0,
+                from = LocalDateTime.now()
             )
         )
 

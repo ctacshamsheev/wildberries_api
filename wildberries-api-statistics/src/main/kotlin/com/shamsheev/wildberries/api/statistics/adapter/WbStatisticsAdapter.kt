@@ -223,7 +223,7 @@ class WbStatisticsAdapter(
         totalPrice = totalPrice,
         dateClose = dateClose,
         warehouseName = warehouseName,
-        status = status?.value,
+        status = status, // ?
     )
 
 }
