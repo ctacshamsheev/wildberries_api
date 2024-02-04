@@ -5,7 +5,8 @@
     <a th:href="@{/}">меню</a>
 </div>
 <div>
-    История вызовов api
+    <h3>История вызовов api</h3>
+    текущее время сервера:<p th:text="${#execInfo.now.time}"></p>
     <table border="collapse">
         <ul>
             <tr>

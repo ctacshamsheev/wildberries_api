@@ -17,3 +17,6 @@ databaseChangeLog:
       file: db/changelog/create_api_request_result.sql
   - include:
       file: db/changelog/update_api_request_result.sql
+  - include:
+      file: db/changelog/create_users.sql
+

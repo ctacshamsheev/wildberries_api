@@ -18,6 +18,9 @@ spring:
     url: 'jdbc:postgresql://localhost:5432/db'
 
 wildberries:
+  admin:
+    username: 'admin'
+    password: 'admin'
   statistics:
     url: 'https://statistics-api.wildberries.ru/'
     auth:
@@ -47,7 +50,6 @@ wildberries:
       cron:
         enabled: true
         value: '0 22,52 * * * *'
-timezone: 4
 
 logging:
   level:

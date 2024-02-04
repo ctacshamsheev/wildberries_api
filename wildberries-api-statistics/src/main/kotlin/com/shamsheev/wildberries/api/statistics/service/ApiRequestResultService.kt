@@ -43,7 +43,11 @@ class ApiRequestResultService(
                 end = LocalDateTime.now(),
                 apiType = apiType,
                 apiStatus = apiStatus,
-                errorMessage = errorMessage?.substring(255),
+                errorMessage = if (errorMessage != null && errorMessage.length > 254) {
+                    errorMessage.substring(0, 254)
+                } else {
+                    errorMessage
+                },
                 count = count,
                 from = fromDateTime
             )

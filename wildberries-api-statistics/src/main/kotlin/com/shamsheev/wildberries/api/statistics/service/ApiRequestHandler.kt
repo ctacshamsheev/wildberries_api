@@ -3,7 +3,6 @@ package com.shamsheev.wildberries.api.statistics.service
 import com.shamsheev.wildberries.api.statistics.model.ApiType
 import com.shamsheev.wildberries.api.statistics.ports.event.ApiSchedulingEvent
 import mu.KotlinLogging
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.event.EventListener
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
@@ -13,9 +12,6 @@ class ApiRequestHandler(
     val apiRequestService: ApiRequestService,
     val apiRequestResultService: ApiRequestResultService,
 ) {
-
-    @Value("\${timezone:4}")
-    var timezone: Long = 4
 
     @EventListener(ApiSchedulingEvent::class)
     fun ordersScheduling(event: ApiSchedulingEvent) {
@@ -51,8 +47,7 @@ class ApiRequestHandler(
 
     private fun getStartDate(apiType: ApiType): LocalDateTime {
         return apiRequestResultService.getLastSuccessDateByApiType(apiType)
-            .orElse(LocalDateTime.MIN.plusHours(timezone))
-            .minusHours(timezone)
+            .orElse(LocalDateTime.MIN)
     }
 
     companion object {
