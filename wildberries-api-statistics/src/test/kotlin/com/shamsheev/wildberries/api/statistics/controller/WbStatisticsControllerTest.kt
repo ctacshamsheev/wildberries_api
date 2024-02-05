@@ -9,7 +9,9 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.security.test.context.support.WithMockUser
 import org.springframework.test.web.servlet.MockMvc
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.*
 
 
@@ -25,20 +27,35 @@ internal class WbStatisticsControllerTest {
 
     @Test
     @Order(1)
-    fun `for any unauthorized user following URL should redirect to _login page`() {
+    fun notAuthorize() {
         mockMvc
-            .perform(get("/app/list"))
+            .perform(get("/"))
             .andExpect(status().is3xxRedirection)
     }
 
-    @WithMockUser(username = "some_user", password = "some_password", roles = ["ADMIN", "USER"])
+
     @Test
-    @Order(2)
-    fun `method get to _app_list should return empty list`() {
-//        assertFalse {
-//            sendGetToAppList().andReturn()
-//                .response
-//                .contentAsString.matches(Regex(testAddress.name!!))
-//        }
+    @WithMockUser(username = "user", password = "user", roles = ["USER"])
+    fun index() {
+        //given
+        //when
+        mockMvc.perform(
+            MockMvcRequestBuilders
+                .get("/")
+        )
+            //then
+            .andExpect(MockMvcResultMatchers.status().isOk)
+    }
+
+    @Test
+    @WithMockUser(username = "user", password = "user", authorities = ["USER"])
+    fun scheduler() {
+        //given
+        //when
+        mockMvc.perform(
+            get("/scheduling/results")
+        )
+            //then
+            .andExpect(MockMvcResultMatchers.status().is4xxClientError)
     }
 }
