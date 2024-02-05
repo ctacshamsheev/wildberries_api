@@ -72,7 +72,7 @@ class ApiRequestService(
             incomesResult
         } catch (e: Exception) {
             log.error { "${e.message}: $e" }
-            apiRequestResultService.save(startDateTime, ApiType.STOCKS, ApiStatus.ERROR, 0, fromTime, e.message)
+            apiRequestResultService.save(startDateTime, ApiType.INCOMES, ApiStatus.ERROR, 0, fromTime, e.message)
             emptyList()
         }
     }
