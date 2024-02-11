@@ -1,4 +1,4 @@
-package com.shamsheev.wildberries.api.statistics.ports.event
+package com.shamsheev.wildberries.api.statistics.port.event
 
 import com.shamsheev.wildberries.api.statistics.model.ApiType
 import org.springframework.context.ApplicationEvent

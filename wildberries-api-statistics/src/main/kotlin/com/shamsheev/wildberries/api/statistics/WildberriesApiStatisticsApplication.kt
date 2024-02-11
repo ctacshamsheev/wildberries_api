@@ -7,7 +7,6 @@ import org.springframework.boot.web.servlet.ServletComponentScan
 
 @SpringBootApplication
 @ServletComponentScan
-//@EnableFeignClients
 class WildberriesApiStatisticsApplication
 
 fun main(args: Array<String>) {

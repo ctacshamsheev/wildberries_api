@@ -1,7 +1,7 @@
 package com.shamsheev.wildberries.api.statistics.service
 
 import com.shamsheev.wildberries.api.statistics.model.*
-import com.shamsheev.wildberries.api.statistics.ports.WbStatistics
+import com.shamsheev.wildberries.api.statistics.port.WbStatistics
 import mu.KotlinLogging
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime

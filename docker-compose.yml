@@ -3,10 +3,10 @@ version: '3.9'
 services:
   appserver:
     container_name: wildberries-api-statistics
-    build:
-      context: ./wildberries-api-statistics/
-      dockerfile: ./Dockerfile
-    #    image: ctacshamsheev/wildberries-api-statistics:v1.0
+    #    build:
+    #      context: ./wildberries-api-statistics/
+    #      dockerfile: ./Dockerfile
+    image: ctacshamsheev/wildberries-api-statistics:v1.0
     restart: always
     ports:
       - '80:8080'

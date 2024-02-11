@@ -1,14 +1,14 @@
 package com.shamsheev.wildberries.api.statistics.service
 
 import com.shamsheev.wildberries.api.statistics.model.ApiType
-import com.shamsheev.wildberries.api.statistics.ports.event.ApiSchedulingEvent
+import com.shamsheev.wildberries.api.statistics.port.event.ApiSchedulingEvent
 import mu.KotlinLogging
 import org.springframework.context.event.EventListener
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
 
 @Service
-class ApiRequestHandler(
+class ApiShedulingEventHandler(
     val apiRequestService: ApiRequestService,
     val apiRequestResultService: ApiRequestResultService,
 ) {

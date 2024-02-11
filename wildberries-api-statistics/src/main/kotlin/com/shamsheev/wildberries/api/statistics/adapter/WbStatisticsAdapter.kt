@@ -2,7 +2,7 @@ package com.shamsheev.wildberries.api.statistics.adapter
 
 import com.shamsheev.wildberries.api.statistics.exception.GetApiException
 import com.shamsheev.wildberries.api.statistics.model.*
-import com.shamsheev.wildberries.api.statistics.ports.WbStatistics
+import com.shamsheev.wildberries.api.statistics.port.WbStatistics
 import mu.KotlinLogging
 import openapi.wildberries.ru.statistics.apis.DefaultApi
 import openapi.wildberries.ru.statistics.models.*

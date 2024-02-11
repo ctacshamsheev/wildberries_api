@@ -1,7 +1,7 @@
 package com.shamsheev.wildberries.api.statistics.adapter
 
 import com.shamsheev.wildberries.api.statistics.model.ApiType
-import com.shamsheev.wildberries.api.statistics.ports.event.ApiSchedulingEvent
+import com.shamsheev.wildberries.api.statistics.port.event.ApiSchedulingEvent
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.ApplicationEventPublisher
 import org.springframework.scheduling.annotation.Scheduled

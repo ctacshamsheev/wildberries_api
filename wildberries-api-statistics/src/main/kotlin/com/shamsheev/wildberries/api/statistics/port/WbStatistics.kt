@@ -1,4 +1,4 @@
-package com.shamsheev.wildberries.api.statistics.ports
+package com.shamsheev.wildberries.api.statistics.port
 
 import com.shamsheev.wildberries.api.statistics.model.Income
 import com.shamsheev.wildberries.api.statistics.model.Order
