@@ -6,6 +6,33 @@
 </div>
 <div>
     Заказы.
+
+    <table border="collapse">
+        <tr>
+            <td>Количество заказов:
+            </td>
+            <td th:text="${count}">
+            </td>
+        </tr>
+        <tr>
+            <td>Количество не отмененных заказов:
+            </td>
+            <td th:text="${countNot}">
+            </td>
+        </tr>
+        <tr>
+            <td>Сумма не отмененных заказов:
+            </td>
+            <td th:text="${sum}">
+            </td>
+        </tr>
+        <tr>
+            <td>Конверсия:
+            </td>
+            <td th:text="${convers}">
+            </td>
+        </tr>
+    </table>
     <table border="collapse">
         <tr>
             <td><b>Дата и время заказа:</b></td>

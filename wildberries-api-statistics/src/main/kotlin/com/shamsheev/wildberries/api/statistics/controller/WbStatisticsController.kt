@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.*
 import java.io.File
+import java.math.BigDecimal
 import java.time.LocalDateTime
 
 
@@ -28,7 +29,26 @@ class WbStatisticsController(
         model: Model,
     ): String {
         val results = orderService.findAllByDateBetween(LocalDateTime.parse(start), LocalDateTime.parse(end))
+        val count = results.size
+        val countNot = results.count { order -> order.isCancel != true }
+        val prices = results
+            .filter { order -> order.isCancel != true }
+            .map { order -> order.totalPrice }
+            .filterNotNull()
+            .toList()
+
+        var sum = BigDecimal.ZERO
+        for (price in prices) {
+            sum = sum.plus(price)
+        }
+
         model.addAttribute("orders", results)
+        model.addAttribute("count", count)
+        model.addAttribute("countNot", countNot)
+        model.addAttribute("convers", "%.2f".format(countNot.toDouble() / count.toDouble()))
+        model.addAttribute("sum", sum)
+        model.addAttribute("start", LocalDateTime.parse(start))
+        model.addAttribute("end", LocalDateTime.parse(end))
         return "order"
     }
 
