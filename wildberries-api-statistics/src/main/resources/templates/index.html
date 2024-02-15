@@ -88,7 +88,7 @@
 <br>
 <br>
 <br>
-<div>
+<div sec:authorize="hasAuthority('ADMIN')">
     <form th:action="@{/}">
         Ручной вызов шедулера:
         <table>
@@ -141,6 +141,10 @@
             </tr>
         </table>
     </form>
+</div>
+
+<div sec:authorize="hasAuthority('ADMIN')">
+    <a th:href="@{/users}">users</a>
 </div>
 <div>
     <a th:href="@{/logout}">logout</a>

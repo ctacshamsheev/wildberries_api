@@ -1,6 +1,7 @@
 package com.shamsheev.wildberries.api.statistics.service
 
 import com.shamsheev.wildberries.api.statistics.model.Order
+import com.shamsheev.wildberries.api.statistics.model.StatisticsData
 import com.shamsheev.wildberries.api.statistics.repository.OrderRepository
 import org.apache.poi.hssf.usermodel.HSSFSheet
 import org.apache.poi.hssf.usermodel.HSSFWorkbook
@@ -19,6 +20,7 @@ import javax.transaction.Transactional
 class OrderService(
     @Autowired val orderRepository: OrderRepository,
     @Autowired val productService: ProductService,
+    @Autowired val statisticsService: StatisticsService,
 ) {
     @Transactional
     fun save(order: Order) {
@@ -35,14 +37,22 @@ class OrderService(
 
 
     fun writeAllByDateBetween(start: LocalDateTime, end: LocalDateTime) =
-        getFileCsv(orderRepository.findAllByDateBetweenOrderByDate(start, end))
+        getFileCsv(
+            orderRepository.findAllByDateBetweenOrderByDate(start, end),
+            statisticsService.getStatistics(start, end)
+        )
 
 
-    private fun getFileCsv(ordersList: List<Order>): File {
+    private fun getFileCsv(
+        ordersList: List<Order>,
+        statistics: StatisticsData,
+    ): File {
         val workbook = HSSFWorkbook()
-        val sheet = workbook.createSheet()
+        val sheet = workbook.createSheet("order")
+        val sheet2 = workbook.createSheet("stat")
         val tempFile = File.createTempFile("file", ".xls")
         setRowsCells(workbook, ordersList, sheet)
+        setStats(workbook, statistics, sheet2)
         setAutosizeColumn(sheet, getHeaders().size)
         setHeaderRow(sheet, workbook)
         workbook.write(tempFile.outputStream())
@@ -171,4 +181,42 @@ class OrderService(
         "Номер заказа",
         "Уникальный идентификатор заказа",
     )
+
+
+    private fun setStats(
+        workbook: HSSFWorkbook,
+        statistics: StatisticsData,
+        workSheet: HSSFSheet,
+    ) {
+        val headerRow = workSheet.createRow(0)
+        val styleWrap = workbook.createCellStyle()
+        styleWrap.wrapText = true
+        styleWrap.alignment = HorizontalAlignment.CENTER
+        styleWrap.verticalAlignment = VerticalAlignment.CENTER
+
+        val cellStyleDate: CellStyle = workbook.createCellStyle()
+        val createHelper: CreationHelper = workbook.creationHelper
+        cellStyleDate.dataFormat = createHelper.createDataFormat().getFormat("dd.mm.yyyy")
+
+        headerRow.createCell(0).setCellValue("Date")
+        workSheet.setColumnWidth(0, 3000)
+        for ((index, value) in statistics.headers.withIndex()) {
+            val cell = headerRow.createCell(index + 1)
+            cell.setCellValue(value)
+            cell.setCellStyle(styleWrap)
+        }
+
+        var i = 0
+        for ((index, value) in statistics.dates.withIndex()) {
+            val row = workSheet.createRow(index + 1)
+            var cell = row.createCell(0)
+            cell.setCellValue(value)
+            cell.setCellStyle(cellStyleDate)
+
+            for ((indexC, valueC) in statistics.table[index].withIndex()) {
+                valueC
+                row.createCell(indexC + 1).setCellValue(valueC.toDouble())
+            }
+        }
+    }
 }

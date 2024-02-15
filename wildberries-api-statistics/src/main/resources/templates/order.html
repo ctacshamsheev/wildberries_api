@@ -9,6 +9,12 @@
 
     <table border="collapse">
         <tr>
+            <td th:text="${#temporals.format(start, 'dd-MM-yyyy HH:mm:ss')}">
+            </td>
+            <td th:text="${#temporals.format(end, 'dd-MM-yyyy HH:mm:ss')}">
+            </td>
+        </tr>
+        <tr>
             <td>Количество заказов:
             </td>
             <td th:text="${count}">
