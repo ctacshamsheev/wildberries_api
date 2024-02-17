@@ -1,1 +1,7 @@
+telegram:
+  auth:
+    name: 'wb_statistics_shamsheev_bot'
+    token: '6730116672:AAFtGN_c1cDMsVbJWFovt1YDbzD-96v8lMI'
 
+server:
+  port: 8081

@@ -1,0 +1,9 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<form method="POST" th:action="@{/telegram/send}">
+    <p>message:<input th:field="*{message}" type="text"/></p>
+    <input type="submit" value="save"/>
+</form>
+</body>
+</html>
