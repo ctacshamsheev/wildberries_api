@@ -1,50 +1,58 @@
 <!DOCTYPE HTML>
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>API Статистики v1.0: Поставки</title>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" rel="stylesheet">
+</head>
 <body>
+<div th:insert="navbar :: navbar"></div>
 
-<div>
-    <a th:href="@{/}">меню</a>
-</div>
-<div>
-    Поставки.
-    <table border="collapse">
-        <tr>
-            <td><b>Номер поставки:</b></td>
-            <td><b>Номер УПД:</b></td>
-            <td><b>Дата поступления:</b></td>
-            <td><b>Дата и время обновления:</b></td>
-            <td><b>Артикул продавца:</b></td>
-            <td><b>Артикул WB:</b></td>
-            <td><b>Баркод:</b></td>
-            <td><b>Категория:</b></td>
-            <td><b>Предмет:</b></td>
-            <td><b>Бренд:</b></td>
-            <td><b>Размер товара:</b></td>
-            <td><b>Количество:</b></td>
-            <td><b>Цена из УПД:</b></td>
-            <td><b>Дата принятия (закрытия) в WB:</b></td>
-            <td><b>Название склада:</b></td>
-            <td><b>Текущий статус поставки:</b></td>
-        </tr>
-        <tr th:each="income : ${incomes}">
-            <td th:text="${income.incomeId}"></td>
-            <td th:text="${income.number}"></td>
-            <td th:text="${#temporals.format(income.date, 'dd-MM-yyyy HH:mm:ss')}"></td>
-            <td th:text="${#temporals.format(income.lastChangeDate, 'dd-MM-yyyy HH:mm:ss')}"></td>
-            <td th:text="${income.product.supId}"></td>
-            <td th:text="${income.product.wbId}"></td>
-            <td th:text="${income.product.id}"></td>
-            <td th:text="${income.product.category}"></td>
-            <td th:text="${income.product.subject}"></td>
-            <td th:text="${income.product.brand}"></td>
-            <td th:text="${income.product.size}"></td>
-            <td th:text="${income.quantity}"></td>
-            <td th:text="${income.totalPrice}"></td>
-            <td th:text="${income.dateClose}"></td>
-            <td th:text="${income.warehouseName}"></td>
-            <td th:text="${income.status}"></td>
-        </tr>
-    </table>
+<div class="float-left mt-5">
+    <div>
+
+        Поставки.
+        <table class="table table-striped">
+            <tr>
+                <td><b>Номер поставки:</b></td>
+                <td><b>Номер УПД:</b></td>
+                <td><b>Дата поступления:</b></td>
+                <td><b>Дата и время обновления:</b></td>
+                <td><b>Артикул продавца:</b></td>
+                <td><b>Артикул WB:</b></td>
+                <td><b>Баркод:</b></td>
+                <td><b>Категория:</b></td>
+                <td><b>Предмет:</b></td>
+                <td><b>Бренд:</b></td>
+                <td><b>Размер товара:</b></td>
+                <td><b>Количество:</b></td>
+                <td><b>Цена из УПД:</b></td>
+                <td><b>Дата принятия (закрытия) в WB:</b></td>
+                <td><b>Название склада:</b></td>
+                <td><b>Текущий статус поставки:</b></td>
+            </tr>
+            <tr th:each="income : ${incomes}">
+                <td th:text="${income.incomeId}"></td>
+                <td th:text="${income.number}"></td>
+                <td th:text="${#temporals.format(income.date, 'dd-MM-yyyy HH:mm:ss')}"></td>
+                <td th:text="${#temporals.format(income.lastChangeDate, 'dd-MM-yyyy HH:mm:ss')}"></td>
+                <td th:text="${income.product.supId}"></td>
+                <td th:text="${income.product.wbId}"></td>
+                <td th:text="${income.product.id}"></td>
+                <td th:text="${income.product.category}"></td>
+                <td th:text="${income.product.subject}"></td>
+                <td th:text="${income.product.brand}"></td>
+                <td th:text="${income.product.size}"></td>
+                <td th:text="${income.quantity}"></td>
+                <td th:text="${income.totalPrice}"></td>
+                <td th:text="${income.dateClose}"></td>
+                <td th:text="${income.warehouseName}"></td>
+                <td th:text="${income.status}"></td>
+            </tr>
+        </table>
+    </div>
 </div>
 </body>
 </html>

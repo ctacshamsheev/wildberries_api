@@ -14,6 +14,12 @@ class SchedulingController(
     val apiRequestResultService: ApiRequestResultService,
 ) {
 
+    @GetMapping("/list")
+    fun orders(
+    ): String {
+        return "scheduling"
+    }
+
     @GetMapping("/results")
     fun orders(
         @RequestParam(value = "start") start: String,

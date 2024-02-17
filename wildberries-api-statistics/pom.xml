@@ -257,9 +257,26 @@
         </dependency>
 
         <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-math3</artifactId>
+            <version>3.6.1</version>
+        </dependency>
+
+
+        <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
             <version>${apache.poi.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>5.7.6</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>5.7.6</version>
         </dependency>
 
     </dependencies>
@@ -374,6 +391,14 @@
                         <groupId>org.jetbrains.kotlin</groupId>
                         <artifactId>kotlin-maven-noarg</artifactId>
                         <version>${kotlin.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.thymeleaf.extras</groupId>
+                        <artifactId>thymeleaf-extras-springsecurity5</artifactId>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.thymeleaf</groupId>
+                        <artifactId>thymeleaf-spring5</artifactId>
                     </dependency>
                 </dependencies>
             </plugin>

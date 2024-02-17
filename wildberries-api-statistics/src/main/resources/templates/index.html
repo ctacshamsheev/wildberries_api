@@ -1,153 +1,111 @@
 <!DOCTYPE HTML>
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
-<title>API Статистики v1.0</title>
+<head>
+    <title>API Статистики v1.0</title>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" rel="stylesheet">
+</head>
 <body>
-<h1>API Статистики:</h1>
-<div id="orders">
-    <form th:action="@{/}">
-        <table>
-            <tr>
-                <td>Дата:</td>
-                <td> от
-                    <label>
-                        <input max="2025-12-31T23:59"
-                               min="2020-01-01T00:00"
-                               name="начальная дата"
-                               th:name="start"
-                               type="datetime-local"
-                               value="2024-01-01T00:00">
-                    </label> до
-                    <label>
-                        <input max="2025-12-31T23:59"
-                               min="2020-01-01T00:00"
-                               name="конечная дата"
-                               th:name="end"
-                               type="datetime-local"
-                               value="2024-12-31T23:59">
-                    </label>
-                </td>
-            </tr>
-            <tr>
-                <td><b>Заказы:</b></td>
-                <td> заказы, за указанный промежуток:</td>
-                <td>
-                    <input th:formaction="@{/wildberries/statistics/orders}" type="submit" value="Отобразить"/>
-                    <input th:formaction="@{/wildberries/statistics/orders/download}" type="submit"
-                           value="Скачать"/>
-                </td>
-            </tr>
-            <tr>
-                <td><b>Продажи:</b></td>
-                <td> продажи, за указанный промежуток:</td>
-                <td>
-                    <input th:formaction="@{/wildberries/statistics/sales}" type="submit" value="Отобразить"/>
-                    <input th:formaction="@{/wildberries/statistics/sales/download}" type="submit" value="Скачать"/>
-                </td>
-            </tr>
-            <tr>
-                <td><b>Поставки:</b></td>
-                <td> поставки, за указанный промежуток:</td>
-                <td>
-                    <input th:formaction="@{/wildberries/statistics/incomes}" type="submit" value="Отобразить"/>
-                    <input th:formaction="@{/wildberries/statistics/incomes/download}" type="submit" value="Скачать"/>
-                </td>
-            </tr>
-            <tr>
-                <td><b>Склад:</b></td>
-                <td> остатки товаров на складах WB:</td>
-                <td>
-                    <input th:formaction="@{/wildberries/statistics/stocks}" type="submit" value="Отобразить"/>
-                    <input th:formaction="@{/wildberries/statistics/stocks/download}" type="submit" value="Скачать"/>
-                </td>
-            </tr>
-            <tr>
-                <td><b>Отчет:</b></td>
-                <td>Отчет о продажах по реализации:</td>
-                <td>
-                    <input th:formaction="@{/wildberries/statistics/report}" type="submit" value="Отобразить"/>
-                    <input th:formaction="@{/wildberries/statistics/report/download}" type="submit" value="Скачать"/>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <br>
-                </td>
-            </tr>
-            <tr>
-                <td><b>История вызовов api:</b></td>
-                <td> лог обращений к api wildberries:</td>
-                <td>
-                    <input th:formaction="@{/scheduling/results}" type="submit" value="Отобразить"/>
-                </td>
-            </tr>
-        </table>
-    </form>
-</div>
-<br>
-<br>
-<br>
-<br>
-<br>
-<div sec:authorize="hasAuthority('ADMIN')">
-    <form th:action="@{/}">
-        Ручной вызов шедулера:
-        <table>
-            <tr>
-                <td>дата:</td>
-                <td> от
-                    <label>
-                        <input max="2025-12-31T23:59"
-                               min="2020-01-01T00:00"
-                               name="начальная дата"
-                               th:name="start"
-                               type="datetime-local"
-                               value="2024-01-01T00:00">
-                    </label>
-                </td>
-            </tr>
-            <tr>
-                <td><b>Заказы:</b></td>
-                <td>
-                    <input th:formaction="@{/wildberries/statistics/orders/scheduling}" type="submit"
-                           value="Запустить"/>
-                </td>
-            </tr>
-            <tr>
-                <td><b>Продажи:</b></td>
-                <td>
-                    <input th:formaction="@{/wildberries/statistics/sales/scheduling}" type="submit" value="Запустить"/>
-                </td>
-            </tr>
-            <tr>
-                <td><b>Поставки:</b></td>
-                <td>
-                    <input th:formaction="@{/wildberries/statistics/incomes/scheduling}" type="submit"
-                           value="Запустить"/>
-                </td>
-            </tr>
-            <tr>
-                <td><b>Склад:</b></td>
-                <td>
-                    <input th:formaction="@{/wildberries/statistics/stocks/scheduling}" type="submit"
-                           value="Запустить"/>
-                </td>
-            </tr>
-            <tr>
-                <td><b>Отчет:</b></td>
-                <td>
-                    <input th:formaction="@{/wildberries/statistics/report/scheduling}" type="submit"
-                           value="Запустить"/>
-                </td>
-            </tr>
-        </table>
-    </form>
+<div th:insert="navbar :: navbar"></div>
+
+<div class="container mt-5">
+    <div id="orders">
+        <form th:action="@{/}">
+            <table>
+                <tr>
+                    <td>Дата</td>
+                    <td></td>
+                    <td>
+                        <label>
+
+                            <input class="form-control"
+                                   max="2025-12-31T23:59"
+                                   min="2020-01-01T00:00"
+                                   name="начальная дата"
+                                   th:name="start"
+                                   type="datetime-local"
+                                   value="2024-01-01T00:00">
+
+                        </label>
+                        <label>
+                            <input class="form-control"
+                                   max="2025-12-31T23:59"
+                                   min="2020-01-01T00:00"
+                                   name="конечная дата"
+                                   th:name="end"
+                                   type="datetime-local"
+                                   value="2024-12-31T23:59">
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>Заказы </b></td>
+                    <td></td>
+                    <td>заказы, за указанный промежуток</td>
+                    <td>
+                        <input class="btn btn-outline-success" th:formaction="@{/wildberries/statistics/orders}"
+                               type="submit" value="Отобразить"/>
+                        <input class="btn btn-outline-success"
+                               th:formaction="@{/wildberries/statistics/orders/download}" type="submit"
+                               value="Скачать"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>Продажи </b></td>
+                    <td th:width="10"></td>
+                    <td> продажи, за указанный промежуток</td>
+                    <td>
+                        <input class="btn btn-outline-success" th:formaction="@{/wildberries/statistics/sales}"
+                               type="submit" value="Отобразить"/>
+                        <input class="btn btn-outline-success" th:formaction="@{/wildberries/statistics/sales/download}"
+                               type="submit" value="Скачать"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>Поставки </b></td>
+                    <td></td>
+                    <td> поставки, за указанный промежуток</td>
+                    <td>
+                        <input class="btn btn-outline-success" th:formaction="@{/wildberries/statistics/incomes}"
+                               type="submit" value="Отобразить"/>
+                        <input class="btn btn-outline-success"
+                               th:formaction="@{/wildberries/statistics/incomes/download}" type="submit"
+                               value="Скачать"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>Склад </b></td>
+                    <td></td>
+                    <td> остатки товаров на складах WB</td>
+                    <td>
+                        <input class="btn btn-outline-success" th:formaction="@{/wildberries/statistics/stocks}"
+                               type="submit" value="Отобразить"/>
+                        <input class="btn btn-outline-success"
+                               th:formaction="@{/wildberries/statistics/stocks/download}" type="submit"
+                               value="Скачать"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>Отчет </b></td>
+                    <td></td>
+                    <td> отчет о продажах по реализации</td>
+                    <td>
+                        <input class="btn btn-outline-success" th:formaction="@{/wildberries/statistics/report}"
+                               type="submit" value="Отобразить"/>
+                        <input class="btn btn-outline-success"
+                               th:formaction="@{/wildberries/statistics/report/download}" type="submit"
+                               value="Скачать"/>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
 </div>
 
-<div sec:authorize="hasAuthority('ADMIN')">
-    <a th:href="@{/users}">users</a>
-</div>
-<div>
-    <a th:href="@{/logout}">logout</a>
-</div>
+<script crossorigin="anonymous"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
